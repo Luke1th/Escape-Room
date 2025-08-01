@@ -88,9 +88,9 @@ Contributions are welcome!
 Feel free to fork the repo, create a feature branch, and submit a pull request.
 
 ```bash
-git checkout -b feature/your-feature-name
+git checkout -b your-feature-name
 git commit -m "Add your feature"
-git push origin feature/your-feature-name
+git push origin your-feature-name
 ```
 
 ## 📃 License
