@@ -4,6 +4,9 @@ import { Button } from '@/components/ui/button';
 import { AuthLayout } from '@/components/auth/AuthLayout';
 import { InputField } from '@/components/auth/InputField';
 import { SignInData, AuthState } from '@/types/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '@/firebase/firebaseConfig';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignIn() {
   const [formData, setFormData] = useState<SignInData>({
