@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+//import { Link, useNavigate } from 'react-router-dom';
+//import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { Button } from '@/components/ui/button';
 import { AuthLayout } from '@/components/auth/AuthLayout';
 import { InputField } from '@/components/auth/InputField';
@@ -65,6 +67,27 @@ export default function SignUp() {
     
     setAuthState({ isLoading: true, error: null });
 
+// try {
+  //    const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+    //  const user = userCredential.user;
+
+      // Update display name (full name)
+      //await updateProfile(user, { displayName: formData.fullName });
+
+      //console.log('User created:', user);
+
+      // Navigate to dashboard
+      //navigate('/dashboard');
+      //setAuthState({ isLoading: false, error: null });
+    //} catch (error: any) {
+      //console.error('Sign-up error:', error);
+      //setAuthState({
+        //isLoading: false,
+        //error: { message: error.message || 'Failed to create account. Please try again.' }
+      //});
+    //}
+  //};
+    
     // TODO: Replace with Firebase authentication
     try {
       // Placeholder for Firebase auth logic
