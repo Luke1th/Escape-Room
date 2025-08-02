@@ -4,10 +4,13 @@ import heistBg from '@/assets/heist-dubai-bg.jpg';
 import { motion } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
 import Particles from 'react-tsparticles';
+import BackgroundMusic from '@/components/ui/BackgroundMusic';
 
 const Index = () => {
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
+
+      <BackgroundMusic src="/audio/heist-theme.mp3" />
 
       {/* Background Image */}
       <div

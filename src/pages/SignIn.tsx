@@ -7,6 +7,7 @@ import { SignInData, AuthState } from '@/types/auth';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../Firebase/firebaseConf';
 import { useNavigate } from 'react-router-dom';
+import BackgroundMusic from '@/components/ui/BackgroundMusic';
 
 export default function SignIn() {
   const [formData, setFormData] = useState<SignInData>({
@@ -81,6 +82,7 @@ const handleSubmit = async (e: React.FormEvent) => {
       title="Access the Vault"
       subtitle="Sign in to continue your mission"
     >
+      <BackgroundMusic src="/audio/heist-theme.mp3" />
       <form onSubmit={handleSubmit} className="space-y-6">
         {authState.error && (
           <div className="bg-destructive/10 border border-destructive/20 text-destructive p-3 rounded-lg text-sm animate-fade-in">
