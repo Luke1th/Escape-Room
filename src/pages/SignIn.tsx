@@ -4,9 +4,9 @@ import { Button } from '@/components/ui/button';
 import { AuthLayout } from '@/components/auth/AuthLayout';
 import { InputField } from '@/components/auth/InputField';
 import { SignInData, AuthState } from '@/types/auth';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '@/firebase/firebaseConfig';
-import { useNavigate } from 'react-router-dom';
+//import { signInWithEmailAndPassword } from 'firebase/auth';
+//import { auth } from '@/firebase/firebaseConfig';
+//import { useNavigate } from 'react-router-dom';
 
 export default function SignIn() {
   const [formData, setFormData] = useState<SignInData>({
@@ -29,6 +29,28 @@ export default function SignIn() {
     }
   };
 
+  //const navigate = useNavigate();
+
+//const handleSubmit = async (e: React.FormEvent) => {
+  //e.preventDefault();
+  //setAuthState({ isLoading: true, error: null });
+
+  //try {
+   // const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+    //console.log('User signed in:', userCredential.user);
+
+    // Navigate to dashboard after login success
+    //navigate('/dashboard');
+    //setAuthState({ isLoading: false, error: null });
+  //} catch (error: any) {
+    //console.error('Sign-in error:', error);
+    //setAuthState({
+      //isLoading: false,
+      //error: { message: error.message || 'Invalid email or password. Please try again.' }
+    //});
+  //}
+//};
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setAuthState({ isLoading: true, error: null });
