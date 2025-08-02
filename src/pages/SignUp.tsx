@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-//import { Link, useNavigate } from 'react-router-dom';
-//import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { Button } from '@/components/ui/button';
 import { AuthLayout } from '@/components/auth/AuthLayout';
 import { InputField } from '@/components/auth/InputField';
 import { SignUpData, AuthState } from '@/types/auth';
+import { auth } from '../Firebase/firebaseConf';
 
 export default function SignUp() {
   const [formData, setFormData] = useState<SignUpData>({
@@ -32,6 +33,7 @@ export default function SignUp() {
       setFieldErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
+  const navigate = useNavigate();
 
   const validateForm = (): boolean => {
     const errors: Record<string, string> = {};
@@ -67,48 +69,48 @@ export default function SignUp() {
     
     setAuthState({ isLoading: true, error: null });
 
-// try {
-  //    const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-    //  const user = userCredential.user;
+try {
+     const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+     const user = userCredential.user;
 
       // Update display name (full name)
-      //await updateProfile(user, { displayName: formData.fullName });
+      await updateProfile(user, { displayName: formData.fullName });
 
-      //console.log('User created:', user);
+      console.log('User created:', user);
 
       // Navigate to dashboard
-      //navigate('/dashboard');
-      //setAuthState({ isLoading: false, error: null });
-    //} catch (error: any) {
-      //console.error('Sign-up error:', error);
-      //setAuthState({
-        //isLoading: false,
-        //error: { message: error.message || 'Failed to create account. Please try again.' }
-      //});
-    //}
-  //};
-    
-    // TODO: Replace with Firebase authentication
-    try {
-      // Placeholder for Firebase auth logic
-      console.log('Sign up attempt:', formData);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // TODO: Implement Firebase createUserWithEmailAndPassword
-      // const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-      // await updateProfile(userCredential.user, { displayName: formData.fullName });
-      // Navigate to dashboard or main app
-      
+      navigate('/dashboard');
       setAuthState({ isLoading: false, error: null });
     } catch (error) {
+      console.error('Sign-up error:', error);
       setAuthState({
         isLoading: false,
-        error: { message: 'Failed to create account. Please try again.' }
+        error: { message: error.message || 'Failed to create account. Please try again.' }
       });
     }
   };
+    
+    // TODO: Replace with Firebase authentication
+  //   try {
+  //     // Placeholder for Firebase auth logic
+  //     console.log('Sign up attempt:', formData);
+      
+  //     // Simulate API call
+  //     await new Promise(resolve => setTimeout(resolve, 1000));
+      
+  //     // TODO: Implement Firebase createUserWithEmailAndPassword
+  //     // const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+  //     // await updateProfile(userCredential.user, { displayName: formData.fullName });
+  //     // Navigate to dashboard or main app
+      
+  //     setAuthState({ isLoading: false, error: null });
+  //   } catch (error) {
+  //     setAuthState({
+  //       isLoading: false,
+  //       error: { message: 'Failed to create account. Please try again.' }
+  //     });
+  //   }
+  // };
 
   return (
     <AuthLayout
