@@ -7,7 +7,6 @@ import { SignInData, AuthState } from '@/types/auth';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../Firebase/firebaseConf';
 import { useNavigate } from 'react-router-dom';
-import BackgroundMusic from '@/components/ui/BackgroundMusic';
 
 export default function SignIn() {
   const [formData, setFormData] = useState<SignInData>({
@@ -41,7 +40,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     console.log('User signed in:', userCredential.user);
 
     // Navigate to dashboard after login success
-    navigate('/dashboard');
+    navigate('/intro');
     setAuthState({ isLoading: false, error: null });
   } catch (error) {
     console.error('Sign-in error:', error);
@@ -52,37 +51,12 @@ const handleSubmit = async (e: React.FormEvent) => {
   }
 };
   
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   setAuthState({ isLoading: true, error: null });
-
-  //   // TODO: Replace with Firebase authentication
-  //   try {
-  //     // Placeholder for Firebase auth logic
-  //     console.log('Sign in attempt:', formData);
-      
-  //     // Simulate API call
-  //     await new Promise(resolve => setTimeout(resolve, 1000));
-      
-  //     // TODO: Implement Firebase signInWithEmailAndPassword
-  //     // const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
-  //     // Navigate to dashboard or main app
-      
-  //     setAuthState({ isLoading: false, error: null });
-  //   } catch (error) {
-  //     setAuthState({
-  //       isLoading: false,
-  //       error: { message: 'Invalid email or password. Please try again.' }
-  //     });
-  //   }
-  // };
 
   return (
     <AuthLayout
       title="Access the Vault"
       subtitle="Sign in to continue your mission"
     >
-      <BackgroundMusic src="/audio/heist-theme.mp3" />
       <form onSubmit={handleSubmit} className="space-y-6">
         {authState.error && (
           <div className="bg-destructive/10 border border-destructive/20 text-destructive p-3 rounded-lg text-sm animate-fade-in">

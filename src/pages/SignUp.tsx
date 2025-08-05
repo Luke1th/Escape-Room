@@ -7,7 +7,6 @@ import { AuthLayout } from '@/components/auth/AuthLayout';
 import { InputField } from '@/components/auth/InputField';
 import { SignUpData, AuthState } from '@/types/auth';
 import { auth } from '../Firebase/firebaseConf';
-import BackgroundMusic from '@/components/ui/BackgroundMusic';
 
 export default function SignUp() {
   const [formData, setFormData] = useState<SignUpData>({
@@ -80,7 +79,7 @@ try {
       console.log('User created:', user);
 
       // Navigate to dashboard
-      navigate('/dashboard');
+      navigate('/intro');
       setAuthState({ isLoading: false, error: null });
     } catch (error) {
       console.error('Sign-up error:', error);
@@ -118,7 +117,7 @@ try {
       title="Join the Crew"
       subtitle="Create your account to begin the mission"
     >
-      <BackgroundMusic src="/audio/heist-theme.mp3" />
+
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {authState.error && (
