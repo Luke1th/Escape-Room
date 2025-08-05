@@ -15,7 +15,7 @@ const IntroCutscene = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate('/act1'); // Route after video ends
-    }, 26000); // Adjust to match your video length (e.g., 17s)
+    }, 28000); // Adjust to match your video length (e.g., 17s)
 
     return () => clearTimeout(timer);
   }, [navigate]);
