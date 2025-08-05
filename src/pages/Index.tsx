@@ -40,8 +40,7 @@ const Index = () => {
 
         {/* Animated Mask or Logo (optional) */}
         <motion.img 
-          src="/public/mask.png"
-          // alt="Heist Mask"
+          src="/mask.png"
           className="w-40 mx-auto mb-3"
           animate={{ rotate: [0, 20, -20, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
