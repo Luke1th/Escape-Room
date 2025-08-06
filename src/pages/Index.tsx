@@ -66,7 +66,7 @@ const Index = () => {
                 size="lg"
                 className="text-lg px-8 py-4 h-auto transform hover:scale-105 hover:shadow-xl transition-all duration-300"
               >
-                <Link to="/signin">Log in Now</Link>
+                <Link to="/signin">Log in now</Link>
               </Button>
 
               <Button
@@ -75,7 +75,7 @@ const Index = () => {
                 size="lg"
                 className="text-lg px-8 py-4 h-auto transform hover:scale-105 hover:shadow-xl transition-all duration-300"
               >
-                <Link to="/signup">Sign up to join the crew</Link>
+                <Link to="/signup">Sign up to the Crew</Link>
               </Button>
             </div>
           </motion.div>
