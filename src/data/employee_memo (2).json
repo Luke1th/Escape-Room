@@ -1,0 +1,9 @@
+[
+  {
+    "sender": "laura.martin@mazharbank.com",
+    "subject": "Immediate: New Encryption Key for Secure Terminal",
+    "body": "Dear Team,\n\nTo strengthen our terminal security, we’ve updated the access code to a four-character base-32 password. To derive it, count the number of unique letters in 'encryption' (ignoring duplicates). Convert this number to its two-character base-32 equivalent. Then, append the two-character base-32 value of the number of core banking systems we operate (hint: it’s one less than the number of sides on a square). Use this code for all secure terminal logins starting today, August 6, 2025, 12:55 AM CEST.\n\nRegards,\nLaura Martin\nCybersecurity Analyst",
+    "answer": "IE0C",
+    "explanation": "To find the access code, solve the puzzle: The word 'encryption' has the letters e, n, c, r, y, p, t, i, o, n. Ignoring duplicates, the unique letters are e, n, c, r, y, p, t, i, o (9 letters). In base-32, 9 is represented as I (since 0-9 are 0-9, and 10-31 are A-V; 9 is I in a two-character format with leading 0, so IE). A square has 4 sides, so one less is 3, which in base-32 is 0C (3 is 3, padded to two characters). Concatenating these gives the four-character base-32 password IE0C."
+  }
+]

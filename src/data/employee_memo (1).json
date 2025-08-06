@@ -1,0 +1,9 @@
+[
+  {
+    "sender": "david.lee@mazharbank.com",
+    "subject": "Urgent: Secure File Repository Code Change",
+    "body": "Dear Team,\n\nAs part of our ongoing security enhancements, the secure file repository access code has been updated to a four-character hexadecimal string. To derive it, calculate the number of consonants in the word 'repository'. Convert this to its hexadecimal equivalent. Then, append the hexadecimal value of the number of floors in our main office building (hint: it's the smallest prime number greater than 1). Use this code for all repository access starting today, August 6, 2025.\n\nBest,\nDavid Lee\nData Security Officer",
+    "answer": "6B03",
+    "explanation": "To find the access code, solve the puzzle: The word 'repository' has 10 letters (r, e, p, o, s, i, t, o, r, y), with vowels e, o, i, o (4 vowels). Thus, there are 10 - 4 = 6 consonants. In hexadecimal, 6 is 6B (using two characters for consistency). The smallest prime number greater than 1 is 3, which is 03 in hexadecimal. Concatenating these gives the four-character hex string 6B03."
+  }
+]
