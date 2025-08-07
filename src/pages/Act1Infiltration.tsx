@@ -161,10 +161,10 @@ const Act1Infiltration = () => {
                 <Mail className="h-4 w-4 mr-2" />
                 Inbox ({emails.length - solvedCount})
               </Button>
-              <Button variant="ghost" className="w-full justify-start">
+              {/* <Button variant="ghost" className="w-full justify-start">
                 <Star className="h-4 w-4 mr-2" />
                 Starred
-              </Button>
+              </Button> */}
               <Button variant="ghost" className="w-full justify-start">
                 <Archive className="h-4 w-4 mr-2" />
                 Vault Access

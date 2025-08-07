@@ -36,13 +36,13 @@ const Act1Index = () => {
 
         {/* Mission Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <Card className="gmail-card p-6 text-center slide-in">
-            <DollarSign className="h-8 w-8 text-amber-500 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-foreground mb-2">€2.4B</h3>
+          {/* <Card className="gmail-card p-6 text-center slide-in"> */}
+            {/* <DollarSign className="h-8 w-8 text-amber-500 mx-auto mb-4" /> */}
+            {/* <h3 className="text-2xl font-bold text-foreground mb-2">€2.4B</h3>
             <p className="text-muted-foreground">Target Vault Value</p>
-          </Card>
+          </Card> */}
           
-          <Card className="gmail-card p-6 text-center slide-in" style={{animationDelay: '0.1s'}}>
+          {/* <Card className="gmail-card p-6 text-center slide-in" style={{animationDelay: '0.1s'}}>
             <Lock className="h-8 w-8 text-red-500 mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-foreground mb-2">3 Levels</h3>
             <p className="text-muted-foreground">Security Layers</p>
@@ -52,7 +52,7 @@ const Act1Index = () => {
             <Users className="h-8 w-8 text-blue-500 mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-foreground mb-2">Elite</h3>
             <p className="text-muted-foreground">Access Level</p>
-          </Card>
+          </Card> */}
         </div>
 
         {/* Mission Briefing */}
@@ -66,7 +66,7 @@ const Act1Index = () => {
               <div className="prose text-muted-foreground">
                 <p className="mb-4">
                   Agent, this is your first stage to getting into the vault.You have gained access to the internal communication system of the Royal Mint of Dubai. 
-                  The vault contains €2.4 billion in gold reserves, and we need those access codes to pass the first stage.
+                  The vault contains 500 million dollars in gold reserves, and we need those access codes to pass the first stage.
                 </p>
                 <p className="mb-4">
                   <strong>Your objectives:</strong>
