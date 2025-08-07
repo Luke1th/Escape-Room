@@ -33,7 +33,7 @@ const Index = () => {
       />
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background/90 via-background/70 to-background/90 z-0" />
+      <div className="absolute inset-0 bg-gradient-to-br from-backgrounds/90 via-backgrounds/70 to-backgrounds/90 z-0" />
 
       {/* Main Content */}
       <div className="relative z-10 text-center space-y-8 p-6 w-full max-w-screen-md">
@@ -52,10 +52,10 @@ const Index = () => {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="glass-card rounded-3xl p-10 sm:p-12 max-w-2xl mx-auto backdrop-blur-lg bg-white/5 border border-white/10 shadow-2xl"
           >
-            <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-foreground drop-shadow-[0_0_30px_rgba(255,0,0,0.8)]">
+            <h1 className="text-4xl sm:text-5xl text-foregrounds font-bold mb-6 drop-shadow-[0_0_30px_rgba(255,0,0,0.8)]">
               Money Heist: Dubai
             </h1>
-            <p className="text-lg sm:text-xl text-muted-foreground mb-8">
+            <p className="text-lg sm:text-xl text-muted-foregrounds mb-8">
               Welcome to the most ambitious heist in history. The vault awaits.
             </p>
 

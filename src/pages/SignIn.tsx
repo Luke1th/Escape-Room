@@ -59,7 +59,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     >
       <form onSubmit={handleSubmit} className="space-y-6">
         {authState.error && (
-          <div className="bg-destructive/10 border border-destructive/20 text-destructive p-3 rounded-lg text-sm animate-fade-in">
+          <div className="from-backgrounds/90 border border-destructive/20 text-destructive p-3 rounded-lg text-sm animate-fade-in">
             {authState.error.message}
           </div>
         )}
@@ -93,7 +93,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         <div className="flex items-center justify-between">
           <Link 
             to="/forgot-password" 
-            className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            className="text-sm text-muted-foregrounds hover:text-primary transition-colors"
           >
             Forgot password?
           </Link>
@@ -110,7 +110,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         </Button>
 
         <div className="text-center">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foregrounds">
             New to the crew?{' '}
             <Link 
               to="/signup" 

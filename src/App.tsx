@@ -10,6 +10,10 @@ import Dashboard from "./pages/dashboard";
 import NotFound from "./pages/NotFound";
 import BackgroundMusic from "@/components/ui/BackgroundMusic";
 import IntroCutscene from "./pages/IntroCutscene";
+import Act1Infiltration from "./pages/Act1Infiltration";
+import Act1Index from "./pages/Act1Index";
+import Act2Index from "./pages/Act2Index";
+
 
 const queryClient = new QueryClient();
 
@@ -25,6 +29,9 @@ const App = () => (
           <Route path="/signup" element={<SignUp />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/intro" element={<IntroCutscene />} />
+          <Route path="/act1" element={<Act1Index />} />
+          <Route path="/infiltration" element={<Act1Infiltration />} />
+          <Route path="/act2" element={<Act2Index />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

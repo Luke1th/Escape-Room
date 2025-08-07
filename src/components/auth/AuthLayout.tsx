@@ -17,17 +17,17 @@ export function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
       />
       
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/80 to-background/95" />
+      <div className="absolute inset-0 bg-gradient-to-br from-backgrounds/95 via-background/80 to-background/95" />
       
       {/* Content */}
       <div className="relative z-10 w-full max-w-md p-6 animate-slide-in">
         <div className="glass-card rounded-2xl p-8 space-y-6">
           {/* Header */}
           <div className="text-center space-y-2">
-            <h1 className="text-3xl font-bold text-foreground animate-glow-pulse">
+            <h1 className="text-3xl font-bold text-foregrounds animate-glow-pulse">
               {title}
             </h1>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foregrounds">
               {subtitle}
             </p>
           </div>
