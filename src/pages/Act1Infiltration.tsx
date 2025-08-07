@@ -21,7 +21,7 @@ const Act1Infiltration = () => {
   // Simulate Gmail loading sequence
   useEffect(() => {
     const loadingSequence = [
-      'Loading Gmail...',
+      'Loading email...',
       'Connecting to Dubai servers...',
       'Welcome to the heist.',
     ];
@@ -140,7 +140,7 @@ const Act1Infiltration = () => {
       <div className="bg-card border-b border-border p-3">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium">Gmail hack Progress</span>
+            <span className="text-sm font-medium">Email hack Progress</span>
             <span className="text-sm text-muted-foreground">{solvedCount}/{emails.length} Complete</span>
           </div>
           <div className="w-full bg-secondary h-2 rounded-full">
