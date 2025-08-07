@@ -1,0 +1,9 @@
+[
+  {
+    "sender": "robert.kim@mazharbank.com",
+    "subject": "Critical: New PIN for Secure Vault Access",
+    "body": "Dear Team,\n\nTo strengthen our terminal security, we’ve updated the access code. The new code is the phrase 'Ny Znmune Onax' encoded in ROT13. Decode the ROT13 string to reveal the access code. You can use a tool like CyberChef (https://cyberchef.org) to decode it. Use this code for all secure terminal logins starting today, August 6, 2025, 12:55 AM CEST.\n\nRegards,\nRobert Kim\nCybersecurity Analyst",
+    "answer": "Al Mazhar Bank",
+    "explanation": "The puzzle requires decoding a ROT13-encoded string. The phrase 'Al Mazhar Bank' is encoded in ROT13 as 'Ny Zmmuna Onax'. Using a tool like CyberChef (https://cyberchef.org), input the ROT13 string 'Ny Zmmuna Onax' and select the 'ROT13' operation to decode it. This reveals the original phrase 'Al Mazhar Bank', which is the access code."
+  }
+]
