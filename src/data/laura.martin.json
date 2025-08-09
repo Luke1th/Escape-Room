@@ -1,0 +1,10 @@
+[
+  {
+  "sender": "laura.martin@mazharbank.com",
+  "subject": "Immediate: New Encryption Key for Secure Terminal",
+  "body": "Dear Team,\n\nTo strengthen our terminal security, we’ve updated the access code. The new code is IRSXGZLSOQQFG5DBOIQEI2LBNVXW4ZA= encoded in Base32. Decode the string to reveal the access code. You can use a tool like CyberChef (https://cyberchef.org) to decode it. Use this code for all secure terminal logins starting today, August 6, 2025, 12:55 AM CEST.\n\nRegards,\nLaura Martin\nCybersecurity Analyst",
+  "answer": "Desert Star Diamond",
+  "explanation": "The puzzle requires decoding a Base32 string. Using a tool like CyberChef (https://cyberchef.org), input the string 'IRSXGZLSOQQFG5DBOIQEI2LBNVXW4ZA=' and select the recipe 'From Base32' operation to decode it. This reveals the original phrase 'Desert Star Diamond', which is the access code."
+}
+
+]

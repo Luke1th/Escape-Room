@@ -1,0 +1,9 @@
+[
+  {
+    "sender": "david.lee@mazharbank.com",
+    "subject": "Urgent: Secure File Repository Code Change",
+    "body": "Dear Team,\n\nAs part of our ongoing security enhancements, the secure file repository access code has been updated. The new code is the phrase V2VsY29tZSB0byBNb25leSBIZWlzdCBEdWJhaQ== encoded in Base64. Decode the Base64 string to reveal the access code. You can use a tool like CyberChef[](https://cyberchef.org) to decode it. Use this code for all repository access starting today, August 6, 2025.\n\nBest,\nDavid Lee\nData Security Officer",
+    "answer": "Welcome to Money Heist Dubai",
+    "explanation": "The puzzle requires decoding a Base64-encoded string. The phrase 'Welcome to Money Heist Dubai' is encoded in Base64. Using a tool like CyberChef[](https://cyberchef.org), input the string V2VsY29tZSB0byBNb25leSBIZWlzdCBEdWJhaQ== and select the recipe 'From Base64' operation to decode it. This reveals the original phrase Welcome to Money Heist Dubai, which is the access code."
+  }
+]
