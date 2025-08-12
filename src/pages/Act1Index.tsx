@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Mail, Target, Lock, Shield, Users, DollarSign } from "lucide-react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Act1Index = () => {
   return (
@@ -10,7 +11,11 @@ const Act1Index = () => {
       <div className="gmail-header p-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <Mail className="h-8 w-8 text-red-500" />
+            <img
+              src="/mask.png"
+              alt="Logo"
+              className="h-8 w-8 rounded-full"
+            />
             <h1 className="text-2xl font-bold text-foreground">Money Heist: Dubai</h1>
           </div>
           <div className="flex items-center space-x-2 text-sm text-muted-foreground">
@@ -23,11 +28,14 @@ const Act1Index = () => {
       {/* Main Content */}
       <div className="max-w-4xl mx-auto p-6 pt-12">
         <div className="text-center mb-12 fade-in">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-red-100 rounded-full mb-6">
-            <Target className="h-10 w-10 text-red-600" />
-          </div>
+        <motion.img 
+          src="/mask.png"
+          className="w-40 mx-auto mb-3"
+          animate={{ rotate: [0, 20, -20, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
           <h2 className="text-4xl font-bold text-black-600 mb-4">Welcome to the Heist</h2>
-          <h3 className="text-3xl font-bold text-black-600 mb-4">Act 1 : Infiltration</h3>
+          <h3 className="text-3xl font-bold text-black-600 mb-4">Infiltration</h3>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Your mission: Infiltrate the secure vault communications and crack the access codes. 
             Each email contains a clue to unlock the next level of security.
@@ -65,8 +73,8 @@ const Act1Index = () => {
               <h3 className="text-xl font-semibold text-foreground mb-3">Mission Briefing</h3>
               <div className="prose text-muted-foreground">
                 <p className="mb-4">
-                  Agent, this is your first stage to getting into the vault.You have gained access to the internal communication system of the Royal Mint of Dubai. 
-                  The vault contains 500 million dollars in gold reserves, and we need those access codes to pass the first stage.
+                  Agent, this is your first stage to getting into the vault.You have gained access to the internal communication system of the Al Mazhar Bank in Dubai. 
+                  The vault contains the Desert Star Diamond worth 500 million dollars, and we need those access codes to pass the first stage.
                 </p>
                 <p className="mb-4">
                   <strong>Your objectives:</strong>

@@ -79,7 +79,7 @@ try {
       console.log('User created:', user);
 
       // Navigate to dashboard
-      navigate('/intro');
+      navigate('/act1');
       setAuthState({ isLoading: false, error: null });
     } catch (error) {
       console.error('Sign-up error:', error);

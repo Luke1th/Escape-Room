@@ -40,7 +40,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     console.log('User signed in:', userCredential.user);
 
     // Navigate to dashboard after login success
-    navigate('/intro');
+    navigate('/act1');
     setAuthState({ isLoading: false, error: null });
   } catch (error) {
     console.error('Sign-in error:', error);

@@ -6,6 +6,7 @@ import { CheckCircle, AlertTriangle, Search, Mail, Lock, Unlock, Star, Archive, 
 import { Email, EmailStatus, TerminalMessage } from '@/types/email';
 import emailsData from '@/data/emails.json';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const Act1Infiltration = () => {
   const [emails] = useState<Email[]>(emailsData);
@@ -17,6 +18,21 @@ const Act1Infiltration = () => {
   const [message, setMessage] = useState<TerminalMessage | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [typingText, setTypingText] = useState('');
+
+  // >>> TIMER: config + state
+  const TOTAL_SECONDS = 600; // 10 minutes; change to 900 for 15:00, etc.
+  const [timeLeft, setTimeLeft] = useState<number>(TOTAL_SECONDS);
+  const isTimeUp = timeLeft <= 0;
+  const solvedCount = emailStatuses.filter(status => status.solved).length;
+  const progressPercentage = (solvedCount / emails.length) * 100;
+
+  // Helper to format mm:ss
+  const formatTime = (secs: number) => {
+    const m = Math.floor(secs / 60).toString().padStart(2, '0');
+    const s = Math.floor(secs % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  };
+  // <<< TIMER
 
   // Simulate Gmail loading sequence
   useEffect(() => {
@@ -40,9 +56,20 @@ const Act1Infiltration = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // >>> TIMER: countdown after loading
+  useEffect(() => {
+    if (isLoading) return;
+    const id = setInterval(() => {
+      setTimeLeft(t => (t > 0 ? t - 1 : 0));
+    }, 1000);
+    return () => clearInterval(id);
+  }, [isLoading]);
+  // <<< TIMER
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedEmail || !inputValue.trim()) return;
+
 
     const isCorrect = inputValue.trim().toUpperCase() === selectedEmail.answer.toUpperCase();
     
@@ -96,14 +123,16 @@ const Act1Infiltration = () => {
     return emailStatuses.find(status => status.id === emailId);
   };
 
-  const solvedCount = emailStatuses.filter(status => status.solved).length;
-  const progressPercentage = (solvedCount / emails.length) * 100;
-
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-4">
-          <Mail className="h-16 w-16 mx-auto text-primary" />
+          <motion.img 
+            src="/mask.png"
+            className="w-40 mx-auto mb-3"
+            animate={{ rotate: [0, 20, -20, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          />
           <div className="text-xl font-semibold">
             {typingText}
           </div>
@@ -121,10 +150,28 @@ const Act1Infiltration = () => {
       <div className="bg-white border-b border-border p-4">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="flex items-center space-x-4">
-            <Mail className="h-8 w-8 text-red-500" />
+                <img
+                  src="public\mask.png"
+                  alt="Logo"
+                  className="h-8 w-8 rounded-full"
+                />
+            {/* e
+            {/* <Mail className="h-8 w-8 text-red-500" /> */}
             <h1 className="text-xl font-semibold text-foreground">Money Heist: Dubai</h1>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-4">
+            {/* >>> TIMER: badge */}
+            <div
+              className={`px-3 py-1 rounded-full text-sm font-semibold border ${
+                isTimeUp ? 'bg-red-100 text-red-700 border-red-300'
+                : timeLeft <= 60 ? 'bg-amber-100 text-amber-700 border-amber-300'
+                : 'bg-emerald-50 text-emerald-700 border-emerald-300'
+              }`}
+              title="Time remaining"
+            >
+              ⏱ {formatTime(timeLeft)}
+            </div>
+            {/* <<< TIMER */}
             <div className="relative">
               <Search className="h-4 w-4 absolute left-3 top-3 text-muted-foreground" />
               <Input 
@@ -141,7 +188,9 @@ const Act1Infiltration = () => {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium">Email hack Progress</span>
-            <span className="text-sm text-muted-foreground">{solvedCount}/{emails.length} Complete</span>
+            <span className="text-sm text-muted-foreground">
+              {emailStatuses.filter(s => s.solved).length}/{emails.length} Complete
+            </span>
           </div>
           <div className="w-full bg-secondary h-2 rounded-full">
             <div 
@@ -159,12 +208,8 @@ const Act1Infiltration = () => {
             <div className="space-y-2 mb-6">
               <Button variant="default" className="w-full justify-start bg-red-500 hover:bg-red-600">
                 <Mail className="h-4 w-4 mr-2" />
-                Inbox ({emails.length - solvedCount})
+                Inbox ({emails.length - emailStatuses.filter(s => s.solved).length})
               </Button>
-              {/* <Button variant="ghost" className="w-full justify-start">
-                <Star className="h-4 w-4 mr-2" />
-                Starred
-              </Button> */}
               <Button variant="ghost" className="w-full justify-start">
                 <Archive className="h-4 w-4 mr-2" />
                 Vault Access
@@ -261,15 +306,16 @@ const Act1Infiltration = () => {
                           type="text"
                           value={inputValue}
                           onChange={(e) => setInputValue(e.target.value)}
-                          placeholder="Enter the code to unlock this vault..."
+                          placeholder={isTimeUp ? "Time's up" : "Enter the code to unlock this vault..."}
                           className="bg-background border-border"
                           autoComplete="off"
+                          disabled={isTimeUp}
                         />
                       </div>
                       <Button 
                         type="submit" 
                         className="w-full bg-red-500 hover:bg-red-600"
-                        disabled={!inputValue.trim()}
+                        disabled={!inputValue.trim() || isTimeUp}
                       >
                         <Lock className="h-4 w-4 mr-2" />
                         Unlock Vault
@@ -324,6 +370,28 @@ const Act1Infiltration = () => {
           </Card>
         </div>
       )}
+
+      {/* >>> TIMER: time up overlay */}
+      {isTimeUp && solvedCount !== emails.length && (
+        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50">
+          <Card className="bg-white p-8 text-center max-w-md shadow-xl">
+            <AlertTriangle className="h-16 w-16 mx-auto text-red-500 mb-4" />
+            <h2 className="text-2xl font-bold text-foreground mb-2">Time’s Up</h2>
+            <p className="text-muted-foreground mb-4">
+              The system locked you out before all codes were cracked.
+            </p>
+            <div className="flex items-center justify-center gap-3">
+              <Link to="/">
+                <Button variant="outline">Return to Menu</Button>
+              </Link>
+              <Button onClick={() => window.location.reload()} className="bg-red-500 hover:bg-red-600 text-white">
+                Restart Act 1
+              </Button>
+            </div>
+          </Card>
+        </div>
+      )}
+      {/* <<< TIMER */}
     </div>
   );
 };
