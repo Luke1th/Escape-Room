@@ -59,7 +59,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     >
       <form onSubmit={handleSubmit} className="space-y-6">
         {authState.error && (
-          <div className="from-backgrounds/90 border border-destructive/20 text-destructive p-3 rounded-lg text-sm animate-fade-in">
+          <div className="from-backgrounds/90 border border-destructive/20 text-destructive p-3 rounded-lg text-sm animate-fade-in text-white">
             {authState.error.message}
           </div>
         )}
