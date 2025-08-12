@@ -22,7 +22,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BackgroundMusic src="/public/audio/heist-theme.mp3" /> {/* Render outside Routes */}
+      <BackgroundMusic src="/heist-theme.mp3" /> {/* Render outside Routes */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
