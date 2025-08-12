@@ -22,6 +22,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <BackgroundMusic src="/public/audio/heist-theme.mp3" /> {/* Render outside Routes */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
@@ -32,8 +33,6 @@ const App = () => (
           <Route path="/act1" element={<Act1Index />} />
           <Route path="/infiltration" element={<Act1Infiltration />} />
           <Route path="/act2" element={<Act2Index />} />
-          
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
