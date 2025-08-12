@@ -151,7 +151,7 @@ const Act1Infiltration = () => {
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="flex items-center space-x-4">
                 <img
-                  src="public\mask.png"
+                  src="/mask.png"
                   alt="Logo"
                   className="h-8 w-8 rounded-full"
                 />
