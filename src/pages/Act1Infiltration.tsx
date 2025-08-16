@@ -168,7 +168,7 @@ const Act1Infiltration = () => {
               }`}
               title="Time remaining"
             >
-              ⏱ {formatTime(timeLeft)}
+               {formatTime(timeLeft)}
             </div>
           </div>
         </div>
