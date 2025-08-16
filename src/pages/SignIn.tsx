@@ -56,6 +56,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     <AuthLayout
       title="Access the Vault"
       subtitle="Sign in to continue your mission"
+      
     >
       <form onSubmit={handleSubmit} className="space-y-6">
         {authState.error && (
