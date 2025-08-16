@@ -35,7 +35,7 @@ const Act1Index = () => {
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         />
           <h2 className="text-4xl font-bold text-black-600 mb-4">Welcome to the Heist</h2>
-          <h3 className="text-3xl font-bold text-black-600 mb-4">Infiltration</h3>
+          <h3 className="text-3xl font-bold text-black-600 mb-4"> Infiltration</h3>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Your mission: Infiltrate the secure vault communications and crack the access codes. 
             Each email contains a clue to unlock the next level of security.
