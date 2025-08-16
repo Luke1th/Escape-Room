@@ -12,7 +12,8 @@ import BackgroundMusic from "@/components/ui/BackgroundMusic";
 import IntroCutscene from "./pages/IntroCutscene";
 import Act1Infiltration from "./pages/Act1Infiltration";
 import Act1Index from "./pages/Act1Index";
-import Act2Index from "./pages/Act2Index";
+import Act2DisablingSurveillance from "./pages/Act2DisablingSurveillance";
+import FinalAct from "./pages/FinalAct";
 
 
 const queryClient = new QueryClient();
@@ -32,8 +33,9 @@ const App = () => (
           <Route path="/intro" element={<IntroCutscene />} />
           <Route path="/act1" element={<Act1Index />} />
           <Route path="/infiltration" element={<Act1Infiltration />} />
-          <Route path="/act2" element={<Act2Index />} />
+          <Route path="/act2" element={<Act2DisablingSurveillance />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/finalAct" element={<FinalAct />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

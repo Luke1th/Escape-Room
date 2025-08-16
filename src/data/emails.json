@@ -1,27 +1,26 @@
-[
+ [
   {
     "id": "1",
     "sender": "david.lee@mazharbank.com",
-    "subject": "Urgent: Secure File Repository Code Change",
-    "body": "Dear Team,\n\nAs part of our ongoing security enhancements, the secure file repository access code has been updated to a four-character hexadecimal string. To derive it, calculate the number of consonants in the word 'repository'. Convert this to its hexadecimal equivalent. Then, append the hexadecimal value of the number of floors in our main office building (hint: it's the smallest prime number greater than 1). Use this code for all repository access starting today, August 6, 2025.\n\nBest,\nDavid Lee\nData Security Officer",
-    "answer": "6B03",
-    "explanation": "To find the access code, solve the puzzle: The word 'repository' has 10 letters (r, e, p, o, s, i, t, o, r, y), with vowels e, o, i, o (4 vowels). Thus, there are 10 - 4 = 6 consonants. In hexadecimal, 6 is 6B (using two characters for consistency). The smallest prime number greater than 1 is 3, which is 03 in hexadecimal. Concatenating these gives the four-character hex string 6B03."
+    "subject": "Security Hint: Repository Access Code",
+    "body": "Dear Team,\n\nYour new repository access code is the answer to this riddle:\n\n\"I have keys but no doors. I can type but never speak. What am I?\"\n\nUse the one-word answer as the code.\n\nBest,\nDavid Lee\nData Security Officer",
+    "answer": "Keyboard",
+    "explanation": "A keyboard has keys and is used for typing but doesn't speak or open doors."
   },
   {
     "id": "2",
     "sender": "laura.martin@mazharbank.com",
-    "subject": "Immediate: New Encryption Key for Secure Terminal",
-    "body": "Dear Team,\n\nTo strengthen our terminal security, we’ve updated the access code to a four-character base-32 password. To derive it, count the number of unique letters in 'encryption' (ignoring duplicates). Convert this number to its two-character base-32 equivalent. Then, append the two-character base-32 value of the number of core banking systems we operate (hint: it’s one less than the number of sides on a square). Use this code for all secure terminal logins starting today, August 6, 2025, 12:55 AM CEST.\n\nRegards,\nLaura Martin\nCybersecurity Analyst",
-    "answer": "IE0C",
-    "explanation": "To find the access code, solve the puzzle: The word 'encryption' has the letters e, n, c, r, y, p, t, i, o, n. Ignoring duplicates, the unique letters are e, n, c, r, y, p, t, i, o (9 letters). In base-32, 9 is represented as I (since 0-9 are 0-9, and 10-31 are A-V; 9 is I in a two-character format with leading 0, so IE). A square has 4 sides, so one less is 3, which in base-32 is 0C (3 is 3, padded to two characters). Concatenating these gives the four-character base-32 password IE0C."
+    "subject": "Secure Terminal: Daily Login Code",
+    "body": "Dear Team,\n\nSolve this to get today's terminal code:\n\n\"I stand between you and danger online, letting friends in and keeping strangers out. What am I?\"\n\nUse the answer as the code.\n\nRegards,\nLaura Martin\nCybersecurity Analyst",
+    "answer": "Firewall",
+    "explanation": "A firewall filters network traffic, allowing trusted connections and blocking untrusted ones."
   },
   {
     "id": "3",
     "sender": "robert.kim@mazharbank.com",
-    "subject": "Critical: New PIN for Secure Vault Access",
-    "body": "Dear Team,\n\nTo enhance our vault security protocols, we’ve implemented a new four-digit PIN for access. To derive it, calculate the total number of hours in a standard workweek (Monday to Friday, 8 AM to 4 PM). Then, divide this by the number of consonants in 'vault' and round to the nearest whole number. The result is your four-digit PIN. This code is effective immediately as of August 6, 2025, 12:58 AM CEST.\n\nBest,\nRobert Kim\nVault Operations Manager",
-    "answer": "1333",
-    "explanation": "To find the PIN, solve the puzzle: A standard workweek (Monday to Friday, 8 AM to 4 PM) is 5 days, with 8 hours per day, so 5 * 8 = 40 hours. The word 'vault' has 5 letters (v, a, u, l, t), with vowels a, u (2 vowels), so there are 5 - 2 = 3 consonants. Divide 40 by 3: 40 / 3 ≈ 13.333. Rounding to the nearest whole number gives 13. To form a four-digit PIN, interpret the result as needing padding or repetition for consistency with a four-digit format, leading to 1333 (repeating the rounded result 13 and padding with 33 for a standard PIN length)."
+    "subject": "Vault PIN Update",
+    "body": "Dear Team,\n\nToday's vault PIN is the solution to this riddle:\n\n\"Everyone wants me to be strong, unique, and secret. You use me to get in but never share me. What am I?\"\n\nUse the one-word answer as the PIN.\n\nRegards,\nRobert Kim\nCybersecurity Analyst",
+    "answer": "Password",
+    "explanation": "Strong, unique, secret passwords are needed to gain access but should never be shared."
   }
-  
 ]
