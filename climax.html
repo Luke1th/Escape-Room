@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Escape Room Final Climax</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 20px;
+    }
+    .puzzle-box {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      border-radius: 12px;
+      display: inline-block;
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
+      max-width: 500px;
+    }
+    input {
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 5px;
+      border: none;
+      width: 220px;
+      text-align: center;
+      margin-top: 15px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background: #00c6ff;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #0072ff;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+    .success {
+      color: #00ff99;
+      font-weight: bold;
+    }
+    .failure {
+      color: #ff4444;
+      font-weight: bold;
+    }
+    .hidden {
+      display: none;
+    }
+    .treasure {
+      font-size: 1.5em;
+      margin-top: 25px;
+      animation: glow 1.5s infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #00ff99; }
+      to { text-shadow: 0 0 20px #00ff99; }
+    }
+  </style>
+</head>
+<body>
+  <h1>🌴 The Dubai Escape Challenge – Final Climax 🌴</h1>
+
+  <div class="puzzle-box" id="stage1">
+    <p><strong>Encrypted Code 1:</strong> <span id="encrypted1">75850</span></p>
+    <p>🔐 Clue: Subtract 4 from each digit (mod 10) to reveal the truth.</p>
+    <input type="text" id="input1" maxlength="5" placeholder="Enter 5-digit code">
+    <br>
+    <button onclick="checkStage1()">Unlock</button>
+    <div id="result1" class="result"></div>
+  </div>
+
+  <div class="puzzle-box hidden" id="stage2">
+    <p><strong>Encrypted Code 2:</strong> <span id="encrypted2">9263</span></p>
+    <p>🔐 Clue: Add 3 to each digit (mod 10) to continue.</p>
+    <input type="text" id="input2" maxlength="4" placeholder="Enter 4-digit code">
+    <br>
+    <button onclick="checkStage2()">Unlock</button>
+    <div id="result2" class="result"></div>
+  </div>
+
+  <div class="puzzle-box hidden" id="stage3">
+    <p><strong>Final Vault:</strong> Arrange the letters <strong>"DUBAI"</strong> in reverse to claim your prize.</p>
+    <input type="text" id="input3" maxlength="5" placeholder="Enter code">
+    <br>
+    <button onclick="checkStage3()">Open Vault</button>
+    <div id="result3" class="result"></div>
+    <div id="treasure" class="treasure hidden">💎 Congratulations! You’ve unlocked the Palm Tree Treasure of Dubai! 💎</div>
+  </div>
+
+  <script>
+    // Stage 1: Subtract 4 mod 10
+    const encrypted1 = "75850";
+    const code1 = encrypted1.split("").map(d => (parseInt(d) - 4 + 10) % 10).join(""); // "31415"
+
+    function checkStage1() {
+      const user = document.getElementById("input1").value;
+      const result = document.getElementById("result1");
+
+      if (!/^\d{5}$/.test(user)) {
+        result.innerHTML = "❌ Enter a 5-digit numeric code!";
+        result.className = "result failure";
+        return;
+      }
+
+      if (user === code1) {
+        result.innerHTML = "✅ Stage 1 cleared!";
+        result.className = "result success";
+        document.getElementById("stage2").classList.remove("hidden");
+      } else {
+        result.innerHTML = "❌ Wrong code! Try again!";
+        result.className = "result failure";
+      }
+    }
+
+    // Stage 2: Add 3 mod 10
+    const encrypted2 = "9263";
+    const code2 = encrypted2.split("").map(d => (parseInt(d) + 3) % 10).join(""); // "2596"
+
+    function checkStage2() {
+      const user = document.getElementById("input2").value;
+      const result = document.getElementById("result2");
+
+      if (!/^\d{4}$/.test(user)) {
+        result.innerHTML = "❌ Enter a 4-digit numeric code!";
+        result.className = "result failure";
+        return;
+      }
+
+      if (user === code2) {
+        result.innerHTML = "✅ Stage 2 cleared!";
+        result.className = "result success";
+        document.getElementById("stage3").classList.remove("hidden");
+      } else {
+        result.innerHTML = "❌ Wrong code! Try again!";
+        result.className = "result failure";
+      }
+    }
+
+    // Stage 3: Reverse "DUBAI"
+    const code3 = "IABUD";
+
+    function checkStage3() {
+      const user = document.getElementById("input3").value.toUpperCase();
+      const result = document.getElementById("result3");
+      const treasure = document.getElementById("treasure");
+
+      if (user === code3) {
+        result.innerHTML = "✅ Vault Opened!";
+        result.className = "result success";
+        treasure.classList.remove("hidden");
+      } else {
+        result.innerHTML = "❌ Wrong arrangement! Try again!";
+        result.className = "result failure";
+      }
+    }
+  </script>
+</body>
+</html>
