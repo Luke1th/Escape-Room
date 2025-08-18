@@ -1,49 +1,54 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { CheckCircle, AlertTriangle, Lock, FileText } from 'lucide-react';
+import {
+  CheckCircle,
+  AlertTriangle,
+  Lock,
+  FileText,
+  Mail,
+  Search,
+  Menu,
+  RefreshCw,
+} from 'lucide-react';
 import { Email, EmailStatus, TerminalMessage } from '@/types/email';
 import emailsData from '@/data/emails.json';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const Act1Infiltration = () => {
-  const [emails] = useState<Email[]>(emailsData);
+  const [emails] = useState<Email[]>(emailsData.slice(0, 3)); // Only 3 emails
   const [selectedEmail, setSelectedEmail] = useState<Email | null>(null);
-
-  useEffect(() => {
-    const randomEmail = emails[Math.floor(Math.random() * emails.length)];
-    setSelectedEmail(randomEmail);
-  }, []);
-
   const [emailStatuses, setEmailStatuses] = useState<EmailStatus[]>(
     emails.map(email => ({ id: email.id, solved: false, attempts: 0 }))
   );
-
   const [inputValue, setInputValue] = useState('');
   const [message, setMessage] = useState<TerminalMessage | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [typingText, setTypingText] = useState('');
-
-  // Timer
-  const TOTAL_SECONDS = 300; // 10 minutes
-  const [timeLeft, setTimeLeft] = useState<number>(TOTAL_SECONDS);
+  const [timeLeft, setTimeLeft] = useState<number>(300); // 5 minutes
   const isTimeUp = timeLeft <= 0;
+
 
   const solvedCount = emailStatuses.filter(status => status.solved).length;
   const progressPercentage = (solvedCount / emails.length) * 100;
   const allSolved = solvedCount === emails.length;
+  const [isAttachmentOpen, setIsAttachmentOpen] = useState(false);
 
   const formatTime = (secs: number) => {
     const m = Math.floor(secs / 60).toString().padStart(2, '0');
-    const s = Math.floor(secs % 60).toString().padStart(2, '0');
+    const s = (secs % 60).toString().padStart(2, '0');
     return `${m}:${s}`;
+  };
+
+  const getEmailStatus = (emailId: number) => {
+    return emailStatuses.find(status => status.id === emailId);
   };
 
   // Fake Gmail loading
   useEffect(() => {
     const loadingSequence = [
-      'Loading email...',
+      'Loading Gmail...',
       'Connecting to Dubai servers...',
       'Welcome to the heist.',
     ];
@@ -69,13 +74,19 @@ const Act1Infiltration = () => {
     return () => clearInterval(id);
   }, [isLoading]);
 
+  // Select first unsolved email on load
+  useEffect(() => {
+    if (!isLoading && emails.length > 0) {
+      const firstUnsolved = emails.find(email => !getEmailStatus(email.id)?.solved);
+      if (firstUnsolved) setSelectedEmail(firstUnsolved);
+    }
+  }, [isLoading]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedEmail || !inputValue.trim()) return;
 
-    const isCorrect =
-      inputValue.trim().toUpperCase() ===
-      selectedEmail.answer.toUpperCase();
+    const isCorrect = inputValue.trim().toUpperCase() === selectedEmail.answer.toUpperCase();
 
     if (isCorrect) {
       setEmailStatuses(prev =>
@@ -88,11 +99,8 @@ const Act1Infiltration = () => {
         text: '✅ Vault Access Granted - Code verified',
         timestamp: new Date(),
       });
-
       const nextUnsolved = emails.find(
-        email =>
-          !emailStatuses.find(status => status.id === email.id)?.solved &&
-          email.id !== selectedEmail.id
+        email => !getEmailStatus(email.id)?.solved && email.id !== selectedEmail.id
       );
       if (nextUnsolved) {
         setTimeout(() => setSelectedEmail(nextUnsolved), 1500);
@@ -111,17 +119,26 @@ const Act1Infiltration = () => {
         timestamp: new Date(),
       });
     }
+
     setInputValue('');
     setTimeout(() => setMessage(null), 3000);
   };
 
-  const getEmailStatus = (emailId: number) => {
-    return emailStatuses.find(status => status.id === emailId);
+  const downloadAttachment = (content: string, filename: string) => {
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center space-y-4">
           <motion.img
             src="/mask.png"
@@ -129,152 +146,185 @@ const Act1Infiltration = () => {
             animate={{ rotate: [0, 20, -20, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
           />
-          <div className="text-xl text-white font-semibold">{typingText}</div>
-          <div className="text-sm text-white">Loading your secure email...</div>
+          <div className="text-xl text-gray-800 font-semibold">{typingText}</div>
+          <div className="text-sm text-gray-600">Loading your secure email...</div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-gray-50 text-gray-800">
       {/* Header */}
-      <div className="border-b border-gray-800 p-4">
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <div className="flex items-center space-x-4">
-            <img src="/mask.png" alt="Logo" className="h-8 w-8 rounded-full" />
-            <h1 className="text-xl font-semibold text-red-500">
-              Money Heist: Dubai
-            </h1>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div
-              className={`px-3 py-1 rounded-full text-sm font-semibold border ${
-                isTimeUp
-                  ? 'bg-red-900 text-red-100 border-red-700'
-                  : timeLeft <= 60
-                  ? 'bg-amber-900 text-amber-100 border-amber-700'
-                  : 'bg-green-900 text-green-100 border-green-700'
-              }`}
-              title="Time remaining"
-            >
-              {formatTime(timeLeft)}
-            </div>
+      <div className="flex items-center justify-between border-b border-gray-200 p-2 bg-white">
+        <div className="flex items-center space-x-4">
+          <img src="/mask.png" alt="Logo" className="h-8 w-8 rounded-full" />
+          <h1 className="text-xl font-semibold text-red-600">Money Heist: Dubai</h1>
+        </div>
+        <div className="flex items-center space-x-4">
+          <Search className="h-5 w-5 text-gray-600" />
+          <div className="px-3 py-1 rounded-full text-sm font-semibold bg-gray-200 text-gray-800">
+            {formatTime(timeLeft)}
           </div>
         </div>
       </div>
 
-      {/* Progress */}
-      {/* <div className="bg-gray-900 border-b border-gray-800 p-3">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium">Vault Hack Progress</span>
-            <span className="text-sm text-gray-400">
-              {solvedCount}/{emails.length} Complete
-            </span>
-          </div>
-          <div className="w-full bg-gray-700 h-2 rounded-full">
-            <div
-              className="bg-red-600 h-2 rounded-full transition-all duration-500"
-              style={{ width: `${progressPercentage}%` }}
-            ></div>
+      {/* Main Layout */}
+      <div className="flex h-[calc(100vh-60px)]">
+        {/* Sidebar */}
+        <div className="w-64 border-r border-gray-200 bg-white p-4">
+          <Button className="w-full justify-start mb-4 bg-red-600 hover:bg-red-700">
+            <Mail className="h-4 w-4 mr-2" /> Inbox
+          </Button>
+          <div className="text-sm text-gray-600">
+            <div className="flex items-center justify-between p-2 rounded hover:bg-gray-100">
+              <span>All Emails</span>
+              <span className="bg-gray-200 px-2 py-1 rounded-full text-xs">{emails.length}</span>
+            </div>
           </div>
         </div>
-      </div> */}
 
-      {/* Main */}
-      <div className="max-w-4xl mx-auto p-4">
-        <div className="bg-gray-900 rounded-lg shadow-lg border border-gray-800 overflow-hidden">
-          {selectedEmail ? (
-            <div className="h-full flex flex-col">
-              {/* Header */}
-              <div className="border-b border-gray-800 p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <h2 className="text-xl font-semibold">
-                    {selectedEmail.subject}
-                  </h2>
-                  {getEmailStatus(selectedEmail.id)?.solved && (
-                    <div className="flex items-center space-x-1 text-green-400 bg-green-900 px-3 py-1 rounded-full">
-                      <CheckCircle className="h-4 w-4" />
-                      <span className="text-sm font-medium">
-                        VAULT UNLOCKED
-                      </span>
-                    </div>
+        {/* Inbox List */}
+        <div className="w-80 border-r border-gray-200 bg-white overflow-y-auto">
+          <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+            <h2 className="font-semibold">Inbox</h2>
+            <RefreshCw className="h-4 w-4 text-gray-600" />
+          </div>
+          {emails.map(email => (
+            <div
+              key={email.id}
+              onClick={() => setSelectedEmail(email)}
+              className={`p-3 border-b border-gray-200 cursor-pointer hover:bg-gray-50 flex items-center justify-between ${
+                selectedEmail?.id === email.id ? 'bg-blue-50' : ''
+              }`}
+            >
+              <div className="flex items-center space-x-3">
+                <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
+                  {getEmailStatus(email.id)?.solved ? (
+                    <CheckCircle className="h-4 w-4 text-green-500" />
+                  ) : (
+                    <Lock className="h-4 w-4 text-gray-500" />
                   )}
                 </div>
-                <div className="flex items-center space-x-2 text-sm text-gray-400">
-                  <span className="font-medium">{selectedEmail.sender}</span>
-                  <span>•</span>
-                  <span>Confidential Vault Communication</span>
+                <div>
+                  <div className="font-medium text-sm">{email.sender}</div>
+                  <div className="text-xs text-gray-600 truncate w-48">{email.subject}</div>
                 </div>
               </div>
+            </div>
+          ))}
+        </div>
 
-              {/* Email Body */}
-              <div className="flex-1 overflow-y-auto p-6 bg-gray-800 space-y-4">
-                <div className="prose max-w-none text-gray-200 leading-relaxed">
-                  {selectedEmail.body}
-                </div>
+        {/* Email View */}
+        <div className="flex-1 bg-white">
+          {/* Progress Bar */}
+          <div className="bg-gray-100 p-3 border-b border-gray-200">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-medium">Vault Hack Progress</span>
+              <span className="text-sm text-gray-600">
+                {solvedCount}/{emails.length} Complete
+              </span>
+            </div>
+            <div className="w-full bg-gray-200 h-2 rounded-full">
+              <div
+                className="bg-red-600 h-2 rounded-full transition-all duration-500"
+                style={{ width: `${progressPercentage}%` }}
+              ></div>
+            </div>
+          </div>
 
-                {/* Fake attachment */}
-                {selectedEmail.attachment && (
-                  <Card className="bg-gray-900 border border-gray-700 p-4 mt-4">
-                    <div className="flex items-center space-x-2 mb-2">
-                      <FileText className="h-5 w-5 text-red-400" />
-                      <span className="text-sm text-gray-300 font-medium">
-                        Attachment: vault_logs.txt
-                      </span>
-                    </div>
-                    <pre className="text-xs text-gray-400 whitespace-pre-wrap bg-black/50 p-3 rounded">
-                      {selectedEmail.attachment}
-                    </pre>
-                    <p className="text-xs text-gray-500 mt-2 italic">
-                      Hint: Decode the contents to reveal the vault code.
-                    </p>
-                  </Card>
+          {selectedEmail ? (
+            <div className="h-[calc(100%-50px)] overflow-y-auto p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-semibold">{selectedEmail.subject}</h2>
+                {getEmailStatus(selectedEmail.id)?.solved && (
+                  <div className="flex items-center space-x-1 text-green-600 bg-green-100 px-3 py-1 rounded-full">
+                    <CheckCircle className="h-4 w-4" />
+                    <span className="text-sm font-medium">VAULT UNLOCKED</span>
+                  </div>
                 )}
               </div>
+              <div className="flex items-center space-x-2 text-sm text-gray-600 mb-6">
+                <span className="font-medium">{selectedEmail.sender}</span>
+                <span>•</span>
+                <span>Confidential Vault Communication</span>
+              </div>
+              <div className="prose max-w-none text-gray-700 leading-relaxed mb-6">
+                {selectedEmail.body}
+              </div>
+              {selectedEmail.attachment && (
+                <Card className="bg-gray-50 border border-gray-200 p-4 mb-6">
+                  <div className="flex items-center space-x-2 mb-2">
+                    <FileText className="h-5 w-5 text-red-500" />
+                    <span className="text-sm text-gray-700 font-medium">
+                      Attachment: vault_logs.txt
+                    </span>
+                  </div>
+                  <Button
+                    onClick={() => setIsAttachmentOpen(true)}
+                    className="bg-gray-200 hover:bg-gray-300 text-gray-800"
+                  >
+                    View Attachment
+                  </Button>
+                  <p className="text-xs text-gray-500 mt-2 italic">
+                    Hint: Decode the contents to reveal the vault code.
+                  </p>
+                </Card>
+              )}
 
-              {/* Input */}
+              {/* Attachment Modal */}
+              {isAttachmentOpen && selectedEmail?.attachment && (
+                <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+                  <div className="bg-white p-8 rounded-lg shadow-xl max-w-lg w-full">
+                    <h3 className="text-lg font-semibold mb-4">Attachment Preview</h3>
+                    <pre className="bg-gray-100 p-4 rounded text-sm text-gray-800 max-h-80 overflow-y-auto whitespace-pre-wrap">
+                      {selectedEmail.attachment}
+                    </pre>
+                    <div className="mt-4 flex justify-end">
+                      <Button
+                        onClick={() => setIsAttachmentOpen(false)}
+                        className="bg-red-600 hover:bg-red-700 text-white"
+                      >
+                        Close
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              )}
               {!getEmailStatus(selectedEmail.id)?.solved && (
-                <div className="border-t border-gray-800 p-6 bg-gray-900">
+                <div className="border-t border-gray-200 pt-6">
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium mb-2">
+                      <label className="block text-sm font-medium mb-2 text-gray-700">
                         Enter Vault Access Code:
                       </label>
                       <input
                         type="text"
                         value={inputValue}
                         onChange={e => setInputValue(e.target.value)}
-                        placeholder={
-                          isTimeUp
-                            ? "Time's up"
-                            : 'Enter the code hidden in the file...'
-                        }
-                        className="w-full bg-gray-700 border border-gray-600 rounded p-2 text-white"
+                        placeholder={isTimeUp ? "Time's up" : 'Enter the code hidden in the file...'}
+                        className="w-full bg-gray-100 border border-gray-300 rounded p-2"
                         autoComplete="off"
                         disabled={isTimeUp}
                       />
                     </div>
-                    <button
+                    <Button
                       type="submit"
-                      className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded flex items-center justify-center space-x-2"
+                      className="w-full bg-red-600 hover:bg-red-700 text-white"
                       disabled={!inputValue.trim() || isTimeUp}
                     >
-                      <Lock className="h-4 w-4" />
-                      <span>Unlock Vault</span>
-                    </button>
+                      <Lock className="h-4 w-4 mr-2" />
+                      Unlock Vault
+                    </Button>
                   </form>
                 </div>
               )}
-
-              {/* Status */}
               {message && (
                 <div
-                  className={`p-4 text-center font-medium ${
+                  className={`p-4 text-center font-medium mt-4 rounded ${
                     message.type === 'success'
-                      ? 'bg-green-900 text-green-100'
-                      : 'bg-red-900 text-red-100'
+                      ? 'bg-green-100 text-green-700'
+                      : 'bg-red-100 text-red-700'
                   }`}
                 >
                   {message.text}
@@ -282,50 +332,50 @@ const Act1Infiltration = () => {
               )}
             </div>
           ) : (
-            <div className="h-64 flex items-center justify-center text-center p-8">
-              <p className="text-lg font-medium">Loading vault challenge...</p>
+            <div className="h-full flex items-center justify-center text-center p-8">
+              <p className="text-lg font-medium text-gray-500">Select an email to begin</p>
             </div>
           )}
         </div>
       </div>
 
-      {/* Victory */}
+      {/* Victory Modal */}
       {allSolved && (
-        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-gray-900 p-8 text-center max-w-md rounded-lg border border-green-500 shadow-xl">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white p-8 text-center max-w-md rounded-lg shadow-xl">
             <CheckCircle className="h-16 w-16 mx-auto text-green-500 mb-4" />
-            <h2 className="text-2xl font-bold mb-2"> Vault UNLOCKED!</h2>
-            <p className="text-gray-300 mb-4">
+            <h2 className="text-2xl font-bold mb-2">Vault UNLOCKED!</h2>
+            <p className="text-gray-600 mb-4">
               The vault access code was cracked successfully.
             </p>
-            <div className="text-sm text-green-400 bg-green-900 p-3 rounded">
+            <div className="text-sm text-green-600 bg-green-100 p-3 rounded">
               ✅ Mission accomplished
             </div>
             <div className="mt-6">
               <Link to="/act2">
-                <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded">
+                <Button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded">
                   Next Challenge
-                </button>
+                </Button>
               </Link>
             </div>
           </div>
         </div>
       )}
 
-      {/* Time’s Up */}
+      {/* Time’s Up Modal */}
       {isTimeUp && !allSolved && (
-        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-gray-900 p-8 text-center max-w-md rounded-lg border border-red-500 shadow-xl">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white p-8 text-center max-w-md rounded-lg shadow-xl">
             <AlertTriangle className="h-16 w-16 mx-auto text-red-500 mb-4" />
             <h2 className="text-2xl font-bold mb-2">Time’s Up</h2>
-            <p className="text-gray-300 mb-4">
+            <p className="text-gray-600 mb-4">
               The system locked you out before the code was cracked.
             </p>
             <div className="flex items-center justify-center gap-3">
               <Link to="/act2">
-                <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded">
+                <Button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded">
                   Restart Challenge
-                </button>
+                </Button>
               </Link>
             </div>
           </div>
