@@ -1,26 +1,10 @@
- [
+[
   {
-    "id": "1",
-    "sender": "david.lee@mazharbank.com",
-    "subject": "Security Hint: Repository Access Code",
-    "body": "Dear Team,\n\nYour new repository access code is the answer to this riddle:\n\n\"I have keys but no doors. I can type but never speak. What am I?\"\n\nUse the one-word answer as the code.\n\nBest,\nDavid Lee\nData Security Officer",
-    "answer": "Keyboard",
-    "explanation": "A keyboard has keys and is used for typing but doesn't speak or open doors."
-  },
-  {
-    "id": "2",
-    "sender": "laura.martin@mazharbank.com",
-    "subject": "Secure Terminal: Daily Login Code",
-    "body": "Dear Team,\n\nSolve this to get today's terminal code:\n\n\"I stand between you and danger online, letting friends in and keeping strangers out. What am I?\"\n\nUse the answer as the code.\n\nRegards,\nLaura Martin\nCybersecurity Analyst",
-    "answer": "Firewall",
-    "explanation": "A firewall filters network traffic, allowing trusted connections and blocking untrusted ones."
-  },
-  {
-    "id": "3",
-    "sender": "robert.kim@mazharbank.com",
-    "subject": "Vault PIN Update",
-    "body": "Dear Team,\n\nToday's vault PIN is the solution to this riddle:\n\n\"Everyone wants me to be strong, unique, and secret. You use me to get in but never share me. What am I?\"\n\nUse the one-word answer as the PIN.\n\nRegards,\nRobert Kim\nCybersecurity Analyst",
-    "answer": "Password",
-    "explanation": "Strong, unique, secret passwords are needed to gain access but should never be shared."
+    "id": 1,
+    "subject": "Vault Entry Logs",
+    "sender": "it-admin@bankdubai.com",
+    "body": "Attached is a system log file. The vault code is embedded in the transmission data.",
+    "attachment": "U1lTVEVNX0xPR19TVEFSVCAwMDAxMgpWQVVUX0NPREU6IDQyMTIKU1lTVEVNX0xPR19FTkQ=",
+    "answer": "4212"
   }
 ]

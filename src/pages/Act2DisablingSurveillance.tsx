@@ -7,9 +7,9 @@ import { motion } from "framer-motion";
 const Act2DisablingSurveillance = () => {
   const [snippets, setSnippets] = useState([
     { id: 1, text: "while True:" },
-    { id: 2, text: "footage = load_old_footage()" },
-    { id: 3, text: "send_to_sentrynet(footage)" },
-    { id: 4, text: "time.sleep(60)  # every minute" },
+    { id: 4, text: "footage = load_old_footage()" },
+    { id: 2, text: "send_to_sentrynet(footage)" },
+    { id: 3, text: "time.sleep(60)  # every minute" },
   ]);
 
   const [correctOrder] = useState([1, 2, 3, 4]);

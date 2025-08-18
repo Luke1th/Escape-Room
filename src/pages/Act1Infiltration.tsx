@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
-import { CheckCircle, AlertTriangle, Lock } from 'lucide-react';
+import { CheckCircle, AlertTriangle, Lock, FileText } from 'lucide-react';
 import { Email, EmailStatus, TerminalMessage } from '@/types/email';
 import emailsData from '@/data/emails.json';
 import { motion } from 'framer-motion';
@@ -26,24 +25,22 @@ const Act1Infiltration = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [typingText, setTypingText] = useState('');
 
-  // >>> TIMER: config + state
+  // Timer
   const TOTAL_SECONDS = 600; // 10 minutes
   const [timeLeft, setTimeLeft] = useState<number>(TOTAL_SECONDS);
   const isTimeUp = timeLeft <= 0;
+
   const solvedCount = emailStatuses.filter(status => status.solved).length;
   const progressPercentage = (solvedCount / emails.length) * 100;
   const allSolved = solvedCount === emails.length;
 
-  // Helper to format mm:ss
   const formatTime = (secs: number) => {
     const m = Math.floor(secs / 60).toString().padStart(2, '0');
     const s = Math.floor(secs % 60).toString().padStart(2, '0');
     return `${m}:${s}`;
   };
 
-  // <<< TIMER
-
-  // Simulate Gmail loading sequence
+  // Fake Gmail loading
   useEffect(() => {
     const loadingSequence = [
       'Loading email...',
@@ -63,7 +60,7 @@ const Act1Infiltration = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // >>> TIMER: countdown after loading
+  // Countdown
   useEffect(() => {
     if (isLoading) return;
     const id = setInterval(() => {
@@ -71,30 +68,27 @@ const Act1Infiltration = () => {
     }, 1000);
     return () => clearInterval(id);
   }, [isLoading]);
-  // <<< TIMER
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedEmail || !inputValue.trim()) return;
 
     const isCorrect =
-      inputValue.trim().toUpperCase() === selectedEmail.answer.toUpperCase();
+      inputValue.trim().toUpperCase() ===
+      selectedEmail.answer.toUpperCase();
 
     if (isCorrect) {
-      // Mark email as solved
       setEmailStatuses(prev =>
         prev.map(status =>
           status.id === selectedEmail.id ? { ...status, solved: true } : status
         )
       );
-
       setMessage({
         type: 'success',
         text: '✅ Vault Access Granted - Code verified',
         timestamp: new Date(),
       });
 
-      // Auto-select next unsolved email
       const nextUnsolved = emails.find(
         email =>
           !emailStatuses.find(status => status.id === email.id)?.solved &&
@@ -104,7 +98,6 @@ const Act1Infiltration = () => {
         setTimeout(() => setSelectedEmail(nextUnsolved), 1500);
       }
     } else {
-      // Increment attempts
       setEmailStatuses(prev =>
         prev.map(status =>
           status.id === selectedEmail.id
@@ -112,14 +105,12 @@ const Act1Infiltration = () => {
             : status
         )
       );
-
       setMessage({
         type: 'error',
         text: '❌ Access Denied - Invalid vault code',
         timestamp: new Date(),
       });
     }
-
     setInputValue('');
     setTimeout(() => setMessage(null), 3000);
   };
@@ -157,7 +148,6 @@ const Act1Infiltration = () => {
             </h1>
           </div>
           <div className="flex items-center space-x-4">
-            {/* Timer */}
             <div
               className={`px-3 py-1 rounded-full text-sm font-semibold border ${
                 isTimeUp
@@ -168,14 +158,14 @@ const Act1Infiltration = () => {
               }`}
               title="Time remaining"
             >
-               {formatTime(timeLeft)}
+              {formatTime(timeLeft)}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Progress Bar */}
-      <div className="bg-gray-900 border-b border-gray-800 p-3">
+      {/* Progress */}
+      {/* <div className="bg-gray-900 border-b border-gray-800 p-3">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium">Vault Hack Progress</span>
@@ -190,14 +180,14 @@ const Act1Infiltration = () => {
             ></div>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      {/* Main Content */}
+      {/* Main */}
       <div className="max-w-4xl mx-auto p-4">
         <div className="bg-gray-900 rounded-lg shadow-lg border border-gray-800 overflow-hidden">
           {selectedEmail ? (
             <div className="h-full flex flex-col">
-              {/* Email Header */}
+              {/* Header */}
               <div className="border-b border-gray-800 p-6">
                 <div className="flex items-center justify-between mb-3">
                   <h2 className="text-xl font-semibold">
@@ -206,7 +196,9 @@ const Act1Infiltration = () => {
                   {getEmailStatus(selectedEmail.id)?.solved && (
                     <div className="flex items-center space-x-1 text-green-400 bg-green-900 px-3 py-1 rounded-full">
                       <CheckCircle className="h-4 w-4" />
-                      <span className="text-sm font-medium">VAULT UNLOCKED</span>
+                      <span className="text-sm font-medium">
+                        VAULT UNLOCKED
+                      </span>
                     </div>
                   )}
                 </div>
@@ -218,13 +210,31 @@ const Act1Infiltration = () => {
               </div>
 
               {/* Email Body */}
-              <div className="flex-1 overflow-y-auto p-6 bg-gray-800">
+              <div className="flex-1 overflow-y-auto p-6 bg-gray-800 space-y-4">
                 <div className="prose max-w-none text-gray-200 leading-relaxed">
                   {selectedEmail.body}
                 </div>
+
+                {/* Fake attachment */}
+                {selectedEmail.attachment && (
+                  <Card className="bg-gray-900 border border-gray-700 p-4 mt-4">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <FileText className="h-5 w-5 text-red-400" />
+                      <span className="text-sm text-gray-300 font-medium">
+                        Attachment: vault_logs.txt
+                      </span>
+                    </div>
+                    <pre className="text-xs text-gray-400 whitespace-pre-wrap bg-black/50 p-3 rounded">
+                      {selectedEmail.attachment}
+                    </pre>
+                    <p className="text-xs text-gray-500 mt-2 italic">
+                      Hint: Decode the contents to reveal the vault code.
+                    </p>
+                  </Card>
+                )}
               </div>
 
-              {/* Input Section */}
+              {/* Input */}
               {!getEmailStatus(selectedEmail.id)?.solved && (
                 <div className="border-t border-gray-800 p-6 bg-gray-900">
                   <form onSubmit={handleSubmit} className="space-y-4">
@@ -239,7 +249,7 @@ const Act1Infiltration = () => {
                         placeholder={
                           isTimeUp
                             ? "Time's up"
-                            : 'Enter the code to unlock this vault...'
+                            : 'Enter the code hidden in the file...'
                         }
                         className="w-full bg-gray-700 border border-gray-600 rounded p-2 text-white"
                         autoComplete="off"
@@ -258,7 +268,7 @@ const Act1Infiltration = () => {
                 </div>
               )}
 
-              {/* Status Message */}
+              {/* Status */}
               {message && (
                 <div
                   className={`p-4 text-center font-medium ${
@@ -279,7 +289,7 @@ const Act1Infiltration = () => {
         </div>
       </div>
 
-      {/* All emails solved message */}
+      {/* Victory */}
       {allSolved && (
         <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="bg-gray-900 p-8 text-center max-w-md rounded-lg border border-green-500 shadow-xl">
@@ -293,18 +303,16 @@ const Act1Infiltration = () => {
             </div>
             <div className="mt-6">
               <Link to="/act2">
-              <button
-                className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded"
-              >
-                Next Challenge
-              </button>
+                <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded">
+                  Next Challenge
+                </button>
               </Link>
             </div>
           </div>
         </div>
       )}
 
-      {/* Time's Up Overlay */}
+      {/* Time’s Up */}
       {isTimeUp && !allSolved && (
         <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="bg-gray-900 p-8 text-center max-w-md rounded-lg border border-red-500 shadow-xl">
@@ -315,11 +323,9 @@ const Act1Infiltration = () => {
             </p>
             <div className="flex items-center justify-center gap-3">
               <Link to="/act2">
-              <button
-                className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded"
-              >
-                Restart Challenge
-              </button>
+                <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded">
+                  Restart Challenge
+                </button>
               </Link>
             </div>
           </div>
