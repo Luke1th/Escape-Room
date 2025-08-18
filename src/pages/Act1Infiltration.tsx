@@ -26,7 +26,7 @@ const Act1Infiltration = () => {
   const [typingText, setTypingText] = useState('');
 
   // Timer
-  const TOTAL_SECONDS = 600; // 10 minutes
+  const TOTAL_SECONDS = 300; // 10 minutes
   const [timeLeft, setTimeLeft] = useState<number>(TOTAL_SECONDS);
   const isTimeUp = timeLeft <= 0;
 
