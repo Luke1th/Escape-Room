@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 
-
 export default function FinalAct() {
   const [stage, setStage] = useState(1);
   const [result1, setResult1] = useState("");
   const [result2, setResult2] = useState("");
   const [result3, setResult3] = useState("");
   const [treasureVisible, setTreasureVisible] = useState(false);
+  const [input1, setInput1] = useState("");
+  const [input2, setInput2] = useState("");
+  const [input3, setInput3] = useState("");
 
   const encrypted1 = "75850";
   const code1 = encrypted1
     .split("")
     .map((d) => (parseInt(d) - 4 + 10) % 10)
     .join(""); // "31415"
-
   const encrypted2 = "9263";
   const code2 = encrypted2
     .split("")
     .map((d) => (parseInt(d) + 3) % 10)
     .join(""); // "2596"
-
   const code3 = "IABUD"; // Reverse of DUBAI
 
   const checkStage1 = (user) => {
@@ -58,7 +58,10 @@ export default function FinalAct() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center text-center text-white p-6" style={{ background: "linear-gradient(to right, #0f2027, #203a43, #2c5364)" }}>
+    <div
+      className="min-h-screen flex flex-col items-center justify-center text-center text-white p-6"
+      style={{ background: "linear-gradient(to right, #0f2027, #203a43, #2c5364)" }}
+    >
       <h1 className="text-3xl font-bold mb-6">🌴 The Dubai Escape Challenge – Final Climax 🌴</h1>
 
       {/* Stage 1 */}
@@ -67,15 +70,21 @@ export default function FinalAct() {
           <p className="mb-2 font-semibold">Encrypted Code 1: {encrypted1}</p>
           <p className="mb-4">🔐 Clue: Subtract 4 from each digit (mod 10) to reveal the truth.</p>
           <input
+            id="stage1input"
             type="text"
             maxLength="5"
             placeholder="Enter 5-digit code"
             className="p-2 text-black rounded w-56 text-center"
-            onKeyDown={(e) => e.key === "Enter" && checkStage1(e.target.value)}
+            value={input1}
+            onChange={(e) => setInput1(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && checkStage1(input1)}
           />
           <button
             className="mt-4 px-6 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-600"
-            onClick={() => checkStage1(document.querySelector("#stage1input").value)}
+            onClick={() => {
+              checkStage1(input1);
+              setInput1("");
+            }}
           >
             Unlock
           </button>
@@ -89,15 +98,21 @@ export default function FinalAct() {
           <p className="mb-2 font-semibold">Encrypted Code 2: {encrypted2}</p>
           <p className="mb-4">🔐 Clue: Add 3 to each digit (mod 10) to continue.</p>
           <input
+            id="stage2input"
             type="text"
             maxLength="4"
             placeholder="Enter 4-digit code"
             className="p-2 text-black rounded w-56 text-center"
-            onKeyDown={(e) => e.key === "Enter" && checkStage2(e.target.value)}
+            value={input2}
+            onChange={(e) => setInput2(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && checkStage2(input2)}
           />
           <button
             className="mt-4 px-6 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-600"
-            onClick={() => checkStage2(document.querySelector("#stage2input").value)}
+            onClick={() => {
+              checkStage2(input2);
+              setInput2("");
+            }}
           >
             Unlock
           </button>
@@ -108,23 +123,33 @@ export default function FinalAct() {
       {/* Stage 3 */}
       {stage >= 3 && (
         <div className="bg-black/50 p-6 rounded-2xl shadow-lg max-w-md w-full">
-          <p className="mb-2 font-semibold">Final Vault: Arrange the letters "DUBAI" in reverse to claim your prize.</p>
+          <p className="mb-2 font-semibold">
+            Final Vault: Arrange the letters "DUBAI" in reverse to claim your prize.
+          </p>
           <input
+            id="stage3input"
             type="text"
             maxLength="5"
             placeholder="Enter code"
             className="p-2 text-black rounded w-56 text-center"
-            onKeyDown={(e) => e.key === "Enter" && checkStage3(e.target.value)}
+            value={input3}
+            onChange={(e) => setInput3(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && checkStage3(input3)}
           />
           <button
             className="mt-4 px-6 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-600"
-            onClick={() => checkStage3(document.querySelector("#stage3input").value)}
+            onClick={() => {
+              checkStage3(input3);
+              setInput3("");
+            }}
           >
             Open Vault
           </button>
           <div className="mt-3">{result3}</div>
           {treasureVisible && (
-            <div className="text-xl mt-4 animate-pulse">💎 Congratulations! You’ve unlocked the AL-Mazar Bank's Treasure 💎</div>
+            <div className="text-xl mt-4 animate-pulse">
+              💎 Congratulations! You’ve unlocked the AL-Mazar Bank's Treasure 💎
+            </div>
           )}
         </div>
       )}
