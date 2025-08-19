@@ -3,36 +3,25 @@
     "id": 1,
     "subject": "Vault Entry Logs",
     "sender": "robert.kim@mazharbank.com",
-    "body": "Hello Team,\n\nAs part of our ongoing security audit,
-    I am sharing the latest system log file for your review. 
-    Please note that the vault access code is embedded within the transmission data attached to this email. 
-    Kindly analyze the log and extract the code as per the standard procedure. 
-    If you encounter any issues or require further clarification, feel free to reach out.\n\nBest regards,\nRobert Kim\nIT Security Analyst\nMazhar Bank",
+    "body": "Hello Team,\n\nAs part of our ongoing security audit, I am sharing the latest system log file for your review. Please note that the vault access code is embedded within the transmission data attached to this email. Kindly analyze the log and extract the code as per the standard procedure. If you encounter any issues or require further clarification, feel free to reach out.\n\nBest regards,\nRobert Kim\nIT Security Analyst\nMazhar Bank",
     "attachment": "QUNDRVNTX0NPREU6IDQyMTI=",
-    "answer": "ACCESS_CODE: 4212(Base64)",
+    "answer": "ACCESS_CODE: 4212(Base64)"
   },
 
    {
     "id": 2,
     "subject": "Secure File Repository Code Change",
     "sender": "david.lee@mazharbank.com",
-    "body": "Dear Team,\n\nPlease find attached the latest file repository code update. 
-    The repository code is securely embedded within the transmission data included in this email. 
-    For security reasons, kindly use the designated decryption protocol to extract and 
-    verify the code before applying any changes to the repository.\n\nIf you have any questions or encounter any issues during the extraction process, 
-    do not hesitate to contact me directly.\n\nBest regards,\nDavid Lee\nSenior Systems Engineer\nMazhar Bank",
+    "body": "Dear Team,\n\nPlease find attached the latest file repository code update.The repository code is securely embedded within the transmission data included in this email. For security reasons, kindly use the designated decryption protocol to extract and verify the code before applying any changes to the repository.\n\nIf you have any questions or encounter any issues during the extraction process, do not hesitate to contact me directly.\n\nBest regards,\nDavid Lee\nSenior Systems Engineer\nMazhar Bank",
     "attachment": "7dbbce62a29179679f9be94ab8fb0122bb6cc9e326f81059",
-    "answer": "ACCESS_CODE: 2026(RC2Decrypt)",
+    "answer": "ACCESS_CODE: 2026(RC2Decrypt)"
   },
 
    {
     "id": 3,
     "subject": "New PIN for Vault Access",
     "sender": "laura.martin@mazharbank.com",
-    "body": "Hello Team,\n\nPlease find attached the latest system log file related to vault access. 
-    The new PIN required for entry is embedded within the log file. 
-    Kindly follow the standard extraction procedure to retrieve the PIN and update your records accordingly. 
-    If you have any questions or need assistance with the extraction process, please let me know.\n\nBest regards,\nLaura Martin\nOperations Manager\nMazhar Bank",
+    "body": "Hello Team,\n\nPlease find attached the latest system log file related to vault access. The new PIN required for entry is embedded within the log file. Kindly follow the standard extraction procedure to retrieve the PIN and update your records accordingly. If you have any questions or need assistance with the extraction process, please let me know.\n\nBest regards,\nLaura Martin\nOperations Manager\nMazhar Bank",
     "attachment": "0x410x430x430x450x530x530x5f0x430x4f0x440x450x3a0x200x550x6e0x690x740x380x320x300x300x0a",
     "answer": "ACCESS_CODE: Unit8200(From Hex)"
   }
