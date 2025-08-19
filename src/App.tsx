@@ -14,12 +14,14 @@ import Act1Infiltration from "./pages/Act1Infiltration";
 import Act1Index from "./pages/Act1Index";
 import Act2DisablingSurveillance from "./pages/Act2DisablingSurveillance";
 import FinalAct from "./pages/FinalAct";
+import { GameProvider } from "./contexts/GameContext";
 
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+    <GameProvider>
     <TooltipProvider>
       <Toaster />
       <Sonner />
@@ -39,6 +41,7 @@ const App = () => (
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
+    </GameProvider>
   </QueryClientProvider>
 );
 

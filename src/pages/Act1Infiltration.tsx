@@ -15,8 +15,10 @@ import { Email, EmailStatus, TerminalMessage } from '@/types/email';
 import emailsData from '@/data/emails.json';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useGame } from '@/contexts/GameContext';
 
 const Act1Infiltration = () => {
+  const { updateActTime, updateActScore } = useGame();
   const [emails] = useState<Email[]>(emailsData.slice(0, 3));
   const [selectedEmail, setSelectedEmail] = useState<Email | null>(null);
   const [emailStatuses, setEmailStatuses] = useState<EmailStatus[]>(
@@ -41,6 +43,13 @@ const Act1Infiltration = () => {
 
   const getEmailStatus = (emailId: number) => {
     return emailStatuses.find(status => status.id === emailId);
+  };
+
+  const calculateScore = (timeUsed: number, attempts: number) => {
+    const baseScore = 1000;
+    const timePenalty = timeUsed * 0.5; // Deduct 0.5 points per second
+    const attemptPenalty = attempts * 10; // Deduct 10 points per attempt
+    return Math.max(0, baseScore - timePenalty - attemptPenalty);
   };
 
   useEffect(() => {
@@ -116,16 +125,12 @@ const Act1Infiltration = () => {
     setTimeout(() => setMessage(null), 3000);
   };
 
-  const downloadAttachment = (content: string, filename: string) => {
-    const blob = new Blob([content], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+  const handleActEnd = () => {
+    const timeUsed = 300 - timeLeft;
+    updateActTime(1, timeUsed);
+    const attempts = emailStatuses.reduce((sum, status) => sum + status.attempts, 0);
+    const score = calculateScore(timeUsed, attempts);
+    updateActScore(1, score);
   };
 
   if (isLoading) {
@@ -345,6 +350,7 @@ const Act1Infiltration = () => {
               ✅ Mission accomplished
             </div>
             <div className="mt-6">
+              {/* {handleActEnd()} */}
               <Link to="/act2">
                 <Button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded">
                   Next Challenge
@@ -365,6 +371,7 @@ const Act1Infiltration = () => {
               The system locked you out before the code was cracked.
             </p>
             <div className="flex items-center justify-center gap-3">
+              {handleActEnd()}
               <Link to="/act1">
                 <Button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded">
                   Restart Challenge
