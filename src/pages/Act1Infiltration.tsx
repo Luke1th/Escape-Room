@@ -365,7 +365,7 @@ const Act1Infiltration = () => {
               The system locked you out before the code was cracked.
             </p>
             <div className="flex items-center justify-center gap-3">
-              <Link to="/act2">
+              <Link to="/act1">
                 <Button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded">
                   Restart Challenge
                 </Button>
