@@ -1,20 +1,18 @@
-
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 type GameContextType = {
-  actTimes: Record<number, number>; // { act1: 120, act2: 180, ... }
-  actScores: Record<number, number>; // { act1: 500, act2: 700, ... }
+  actTimes: Record<number, number>;
+  actScores: Record<number, number>;
   totalScore: number;
   updateActTime: (act: number, time: number) => void;
   updateActScore: (act: number, score: number) => void;
-  // Add other methods as needed
 };
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
 
 export const GameProvider = ({ children }: { children: ReactNode }) => {
-  const [actTimes, setActTimes] = useState<Record<number, number>>({});
-  const [actScores, setActScores] = useState<Record<number, number>>({});
+  const [actTimes, setActTimes] = useState<Record<number, number>>({ 1: 0, 2: 0, 3: 0 });
+  const [actScores, setActScores] = useState<Record<number, number>>({ 1: 0, 2: 0, 3: 0 });
 
   const updateActTime = (act: number, time: number) => {
     setActTimes(prev => ({ ...prev, [act]: time }));

@@ -146,7 +146,7 @@ const Act1Infiltration = () => {
         </div>
         <div className="flex items-center space-x-4">
           <div className="px-3 py-1 rounded-full text-sm font-semibold bg-gray-700 text-white">
-            {formatTime(timeLeft)}
+            Time: {formatTime(timeLeft)}
           </div>
         </div>
       </div>
