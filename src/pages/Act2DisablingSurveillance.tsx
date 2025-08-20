@@ -99,9 +99,10 @@ const Act2DisablingSurveillance = () => {
         {/* Header */}
         <div className="flex items-center justify-between w-full">
           <img src="/mask.png" alt="Logo" className="h-10 w-10 rounded-full" />
-          <div className="px-3 py-1 rounded-full text-sm font-semibold bg-gray-900 border border-green-500">
+          <div className="fixed top-0 left-0 right-0 px-3 py-1 rounded-none text-l font-semibold bg-gray-900 border-b border-green-500 z-50 text-center">
             Time: {formatTime(timeLeft)}
           </div>
+
         </div>
 
         {/* Title */}
@@ -198,12 +199,13 @@ def loop_feed():`}
             <div className="text-red-400 font-semibold">
               ⏰ Time’s up! SentryNet detected the intrusion.
               <div className="mt-2">
+                <Link to="/act2">
                 <button
-                  onClick={handleActEnd}
                   className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg"
                 >
-                  Retry
+                  Retry Act 2
                 </button>
+                </Link>
               </div>
             </div>
           )}
