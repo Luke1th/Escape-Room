@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function FinalAct() {
   const [stage, setStage] = useState(1);
@@ -62,6 +63,12 @@ export default function FinalAct() {
       className="min-h-screen flex flex-col items-center justify-center text-center text-white p-6"
       style={{ background: "linear-gradient(to right, #0f2027, #203a43, #2c5364)" }}
     >
+      <motion.img
+                  src="/mask.png"
+                  className="w-40 mx-auto mb-3"
+                  animate={{ rotate: [0, 20, -20, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                />
       <h1 className="text-3xl font-bold mb-6">🌴 The Dubai Escape Challenge – Final Climax 🌴</h1>
 
       {/* Stage 1 */}
