@@ -77,15 +77,10 @@ const Act2DisablingSurveillance = () => {
     setAttempts((prev) => prev + 1);
     const currentOrder = snippets.map((snippet) => snippet.id);
     if (JSON.stringify(currentOrder) === JSON.stringify(correctOrder)) {
-      setMessage(
-        "✅ Success! SentryNet is now looping old footage. Surveillance disabled."
-      );
+      setMessage("✅ Success! SentryNet is now looping old footage. Surveillance disabled.");
       setIsSolved(true);
-      handleActEnd();
     } else {
-      setMessage(
-        "❌ Incorrect order. Check the logic: The loop must handle both valid and fallback footage."
-      );
+      setMessage("❌ Incorrect order. Check the logic: The loop must handle both valid and fallback footage.");
     }
   };
 
@@ -102,14 +97,11 @@ const Act2DisablingSurveillance = () => {
           <div className="fixed top-0 left-0 right-0 px-3 py-1 rounded-none text-l font-semibold bg-gray-900 border-b border-green-500 z-50 text-center">
             Time: {formatTime(timeLeft)}
           </div>
-
         </div>
-
         {/* Title */}
         <h1 className="text-4xl font-extrabold text-center tracking-wide neon-glow">
           Act 2: Disabling Surveillance
         </h1>
-
         {/* Mission Brief */}
         <div className="bg-gray-900/60 border border-green-500/40 rounded-2xl p-6 shadow-lg">
           <h2 className="text-2xl font-bold mb-3">Mission Brief</h2>
@@ -126,7 +118,6 @@ const Act2DisablingSurveillance = () => {
             <li>Delays 60 seconds between sends (`time.sleep(60)`).</li>
           </ul>
         </div>
-
         {/* Code Puzzle */}
         <div className="bg-gray-950 border border-green-500/40 rounded-2xl p-6 shadow-lg">
           <h2 className="text-2xl font-bold mb-3">Code Puzzle</h2>
@@ -149,7 +140,6 @@ def send_to_sentrynet(data):
 def loop_feed():`}
             </pre>
           </div>
-
           {/* Drag-and-Drop Snippets */}
           <DndProvider backend={HTML5Backend}>
             <div className="space-y-2 mb-4">
@@ -165,7 +155,6 @@ def loop_feed():`}
             </div>
           </DndProvider>
         </div>
-
         {/* Buttons & Feedback */}
         <div className="flex flex-col items-center space-y-4">
           <button
@@ -190,7 +179,10 @@ def loop_feed():`}
           )}
           {isSolved && (
             <Link to="/finalAct">
-              <button className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold text-white shadow-md transition">
+              <button
+                onClick={handleActEnd}
+                className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold text-white shadow-md transition"
+              >
                 Proceed to Final Act →
               </button>
             </Link>
@@ -200,11 +192,9 @@ def loop_feed():`}
               ⏰ Time’s up! SentryNet detected the intrusion.
               <div className="mt-2">
                 <Link to="/act2">
-                <button
-                  className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg"
-                >
-                  Retry Act 2
-                </button>
+                  <button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg">
+                    Retry Act 2
+                  </button>
                 </Link>
               </div>
             </div>

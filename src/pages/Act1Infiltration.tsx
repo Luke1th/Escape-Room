@@ -1,16 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import {
-  CheckCircle,
-  AlertTriangle,
-  Lock,
-  FileText,
-  Mail,
-  Search,
-  Menu,
-  RefreshCw,
-} from 'lucide-react';
+import { CheckCircle, AlertTriangle, Lock, FileText, Mail, Search, Menu, RefreshCw } from 'lucide-react';
 import { Email, EmailStatus, TerminalMessage } from '@/types/email';
 import emailsData from '@/data/emails.json';
 import { motion } from 'framer-motion';
@@ -29,11 +20,12 @@ const Act1Infiltration = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [typingText, setTypingText] = useState('');
   const [timeLeft, setTimeLeft] = useState<number>(300);
+  const [isAttachmentOpen, setIsAttachmentOpen] = useState(false);
+
   const isTimeUp = timeLeft <= 0;
   const solvedCount = emailStatuses.filter(status => status.solved).length;
   const progressPercentage = (solvedCount / emails.length) * 100;
   const allSolved = solvedCount === emails.length;
-  const [isAttachmentOpen, setIsAttachmentOpen] = useState(false);
 
   const formatTime = (secs: number) => {
     const m = Math.floor(secs / 60).toString().padStart(2, '0');
@@ -47,8 +39,8 @@ const Act1Infiltration = () => {
 
   const calculateScore = (timeUsed: number, attempts: number) => {
     const baseScore = 1000;
-    const timePenalty = timeUsed * 0.5; // Deduct 0.5 points per second
-    const attemptPenalty = attempts * 10; // Deduct 10 points per attempt
+    const timePenalty = timeUsed * 0.5;
+    const attemptPenalty = attempts * 10;
     return Math.max(0, baseScore - timePenalty - attemptPenalty);
   };
 
@@ -91,11 +83,9 @@ const Act1Infiltration = () => {
     if (!selectedEmail || !inputValue.trim()) return;
     const isCorrect = inputValue.trim().toUpperCase() === selectedEmail.answer.toUpperCase();
     if (isCorrect) {
-      setEmailStatuses(prev =>
-        prev.map(status =>
-          status.id === selectedEmail.id ? { ...status, solved: true } : status
-        )
-      );
+      setEmailStatuses(prev => prev.map(status =>
+        status.id === selectedEmail.id ? { ...status, solved: true } : status
+      ));
       setMessage({
         type: 'success',
         text: '✅ Vault Access Granted - Code verified',
@@ -108,13 +98,9 @@ const Act1Infiltration = () => {
         setTimeout(() => setSelectedEmail(nextUnsolved), 1500);
       }
     } else {
-      setEmailStatuses(prev =>
-        prev.map(status =>
-          status.id === selectedEmail.id
-            ? { ...status, attempts: status.attempts + 1 }
-            : status
-        )
-      );
+      setEmailStatuses(prev => prev.map(status =>
+        status.id === selectedEmail.id ? { ...status, attempts: status.attempts + 1 } : status
+      ));
       setMessage({
         type: 'error',
         text: '❌ Access Denied - Invalid vault code',
@@ -164,13 +150,13 @@ const Act1Infiltration = () => {
           </div>
         </div>
       </div>
-
       {/* Main Layout */}
       <div className="flex h-[calc(100vh-60px)]">
         {/* Sidebar */}
         <div className="w-64 border-r border-gray-700 bg-gray-800 p-4">
           <Button className="w-full justify-start mb-4 bg-red-600 hover:bg-red-700">
-            <Mail className="h-4 w-4 mr-2" /> Inbox
+            <Mail className="h-4 w-4 mr-2" />
+            Inbox
           </Button>
           <div className="text-sm text-gray-400">
             <div className="flex items-center justify-between p-2 rounded hover:bg-gray-700">
@@ -179,7 +165,6 @@ const Act1Infiltration = () => {
             </div>
           </div>
         </div>
-
         {/* Inbox List */}
         <div className="w-80 border-r border-gray-700 bg-gray-800 overflow-y-auto">
           <div className="p-4 border-b border-gray-700 flex items-center justify-between">
@@ -210,7 +195,6 @@ const Act1Infiltration = () => {
             </div>
           ))}
         </div>
-
         {/* Email View */}
         <div className="flex-1 bg-gray-800">
           {/* Progress Bar */}
@@ -228,7 +212,6 @@ const Act1Infiltration = () => {
               ></div>
             </div>
           </div>
-
           {selectedEmail ? (
             <div className="h-[calc(100%-50px)] overflow-y-auto p-6">
               <div className="flex items-center justify-between mb-4">
@@ -252,9 +235,7 @@ const Act1Infiltration = () => {
                 <Card className="bg-gray-700 border border-gray-600 p-4 mb-6">
                   <div className="flex items-center space-x-2 mb-2">
                     <FileText className="h-5 w-5 text-red-400" />
-                    <span className="text-sm text-gray-300 font-medium">
-                      Access Code Attachment
-                    </span>
+                    <span className="text-sm text-gray-300 font-medium">Access Code Attachment</span>
                   </div>
                   <Button
                     onClick={() => setIsAttachmentOpen(true)}
@@ -267,7 +248,6 @@ const Act1Infiltration = () => {
                   </p>
                 </Card>
               )}
-
               {/* Attachment Modal */}
               {isAttachmentOpen && selectedEmail?.attachment && (
                 <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
@@ -287,7 +267,6 @@ const Act1Infiltration = () => {
                   </div>
                 </div>
               )}
-
               {!getEmailStatus(selectedEmail.id)?.solved && (
                 <div className="border-t border-gray-700 pt-6">
                   <form onSubmit={handleSubmit} className="space-y-4">
@@ -298,7 +277,7 @@ const Act1Infiltration = () => {
                       <input
                         type="text"
                         value={inputValue}
-                        onChange={e => setInputValue(e.target.value)}
+                        onChange={(e) => setInputValue(e.target.value)}
                         placeholder={isTimeUp ? "Time's up" : 'Enter the code hidden in the file...'}
                         className="w-full bg-gray-700 border border-gray-600 rounded p-2 text-white"
                         autoComplete="off"
@@ -316,7 +295,6 @@ const Act1Infiltration = () => {
                   </form>
                 </div>
               )}
-
               {message && (
                 <div
                   className={`p-4 text-center font-medium mt-4 rounded ${
@@ -336,23 +314,20 @@ const Act1Infiltration = () => {
           )}
         </div>
       </div>
-
       {/* Victory Modal */}
       {allSolved && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="bg-gray-800 p-8 text-center max-w-md rounded-lg shadow-xl">
             <CheckCircle className="h-16 w-16 mx-auto text-green-400 mb-4" />
             <h2 className="text-2xl font-bold mb-2">Vault UNLOCKED!</h2>
-            <p className="text-gray-300 mb-4">
-              The vault access code was cracked successfully.
-            </p>
-            <div className="text-sm text-green-400 bg-green-900/30 p-3 rounded">
-              ✅ Mission accomplished
-            </div>
+            <p className="text-gray-300 mb-4">The vault access code was cracked successfully.</p>
+            <div className="text-sm text-green-400 bg-green-900/30 p-3 rounded">✅ Mission accomplished</div>
             <div className="mt-6">
-              {/* {handleActEnd()} */}
               <Link to="/act2">
-                <Button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded">
+                <Button
+                  onClick={handleActEnd}
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded"
+                >
                   Next Challenge
                 </Button>
               </Link>
@@ -360,20 +335,19 @@ const Act1Infiltration = () => {
           </div>
         </div>
       )}
-
       {/* Time’s Up Modal */}
       {isTimeUp && !allSolved && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="bg-gray-800 p-8 text-center max-w-md rounded-lg shadow-xl">
             <AlertTriangle className="h-16 w-16 mx-auto text-red-400 mb-4" />
             <h2 className="text-2xl font-bold mb-2">Time’s Up</h2>
-            <p className="text-gray-300 mb-4">
-              The system locked you out before the code was cracked.
-            </p>
+            <p className="text-gray-300 mb-4">The system locked you out before the code was cracked.</p>
             <div className="flex items-center justify-center gap-3">
-              {handleActEnd()}
               <Link to="/act1">
-                <Button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded">
+                <Button
+                  onClick={handleActEnd}
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded"
+                >
                   Restart Challenge
                 </Button>
               </Link>

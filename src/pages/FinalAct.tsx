@@ -5,7 +5,7 @@ import { useGame } from "@/contexts/GameContext";
 import { Link } from "react-router-dom";
 
 export default function FinalAct() {
-  const { updateActTime, updateActScore } = useGame();
+  const { actScores, totalScore, updateActTime, updateActScore } = useGame();
   const [stage, setStage] = useState(1);
   const [result1, setResult1] = useState("");
   const [result2, setResult2] = useState("");
@@ -109,12 +109,10 @@ export default function FinalAct() {
           colors={["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff"]}
         />
       )}
-
       {/* Timer */}
       <div className="absolute top-4 right-4 bg-black/50 px-4 py-2 rounded-lg font-semibold">
         Time Left: {formatTime(timeLeft)}
       </div>
-
       {/* Title and Logo */}
       <motion.img
         src="/mask.png"
@@ -123,7 +121,6 @@ export default function FinalAct() {
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
       <h1 className="text-3xl font-bold mb-6">🌴 The Dubai Escape Challenge – Final Climax 🌴</h1>
-
       {/* Stage 1 */}
       {stage >= 1 && !isTimeUp && (
         <div className="bg-black/50 p-6 rounded-2xl shadow-lg max-w-md w-full mb-6">
@@ -153,7 +150,6 @@ export default function FinalAct() {
           <div className="mt-3">{result1}</div>
         </div>
       )}
-
       {/* Stage 2 */}
       {stage >= 2 && !isTimeUp && (
         <div className="bg-black/50 p-6 rounded-2xl shadow-lg max-w-md w-full mb-6">
@@ -183,7 +179,6 @@ export default function FinalAct() {
           <div className="mt-3">{result2}</div>
         </div>
       )}
-
       {/* Stage 3 */}
       {stage >= 3 && !isTimeUp && (
         <div className="bg-black/50 p-6 rounded-2xl shadow-lg max-w-md w-full">
@@ -214,14 +209,12 @@ export default function FinalAct() {
           <div className="mt-3">{result3}</div>
         </div>
       )}
-
       {/* Time's Up Message */}
       {isTimeUp && !treasureVisible && (
         <div className="bg-black/70 p-6 rounded-2xl shadow-lg max-w-md w-full text-red-400 font-semibold">
           ⏰ Time's up! The vault has locked permanently.
         </div>
       )}
-
       {/* Congratulations Popup */}
       {treasureVisible && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
@@ -233,12 +226,18 @@ export default function FinalAct() {
             <p className="mb-4">
               Your quick thinking and skill have paid off. The Desert Star Diamond is yours!
             </p>
+            {/* Display Scores */}
+            <div className="bg-black/30 p-4 rounded-lg mb-4">
+              <h3 className="text-lg font-semibold mb-2">Your Scores:</h3>
+              <p>Act 1: {actScores[1] || 0} points</p>
+              <p>Act 2: {actScores[2] || 0} points</p>
+              <p>Act 3: {actScores[3] || 0} points</p>
+              <p className="font-bold mt-2">Total: {totalScore} points</p>
+            </div>
             <Link to="/act1">
-            <button
-              className="mt-4 px-6 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-600 font-semibold"
-            >
-              Play Again
-            </button>
+              <button className="mt-4 px-6 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-600 font-semibold">
+                Play Again
+              </button>
             </Link>
           </div>
         </div>

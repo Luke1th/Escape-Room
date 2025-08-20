@@ -16,31 +16,30 @@ import Act2DisablingSurveillance from "./pages/Act2DisablingSurveillance";
 import FinalAct from "./pages/FinalAct";
 import { GameProvider } from "./contexts/GameContext";
 
-
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <GameProvider>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BackgroundMusic src="/heist-theme.mp3" /> {/* Render outside Routes */}
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/intro" element={<IntroCutscene />} />
-          <Route path="/act1" element={<Act1Index />} />
-          <Route path="/infiltration" element={<Act1Infiltration />} />
-          <Route path="/act2" element={<Act2DisablingSurveillance />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/finalAct" element={<FinalAct />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <BackgroundMusic src="/heist-theme.mp3" />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/intro" element={<IntroCutscene />} />
+            <Route path="/act1" element={<Act1Index />} />
+            <Route path="/infiltration" element={<Act1Infiltration />} />
+            <Route path="/act2" element={<Act2DisablingSurveillance />} />
+            <Route path="/finalAct" element={<FinalAct />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
     </GameProvider>
   </QueryClientProvider>
 );
