@@ -45,7 +45,7 @@ Escape-Room/
 ### Installation
 
 ```bash
-git clone https://github.com/Pappyjay157/Escape-Room.git
+git clone https://github.com/Luke1th/Escape-Room.git
 cd Escape-Room
 npm install
 # or
