@@ -3,6 +3,9 @@
 This project is part of a cinematic **Money Heist-themed escape room game** set in **Dubai**, featuring immersive, responsive Sign In and Sign Up screens built using **React**, **TypeScript**, and **Tailwind CSS**.
 
 https://escape-room-hazel.vercel.app/
+
+![buymeacoffee][https://github.com/user-attachments/assets/826c4b89-8b61-4906-9f64-e0a1324dba96](buymeacoffee.com/0xluk3)
+
 ---
 
 ##  Features
