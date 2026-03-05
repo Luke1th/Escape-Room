@@ -4,7 +4,7 @@ This project is part of a cinematic **Money Heist-themed escape room game** set 
 
 https://escape-room-hazel.vercel.app/
 
-![buymeacoffee](buymeacoffee.com/0xluk3)
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/0xLuk3){:target="_blank"}
 
 ---
 
