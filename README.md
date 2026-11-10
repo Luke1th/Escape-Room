@@ -1,6 +1,6 @@
-#  Money Heist: Lockdown Protocol – 
+#  - Money Heist: Lockdown Protocol – 
 
-This project is part of a cinematic **Money Heist-themed escape room game** set in **Dubai**, featuring immersive, responsive Sign In and Sign Up screens built using **React**, **TypeScript**, and **Tailwind CSS**.
+This project is part of a cinematic **Money Heist cybersecurity themed escape room game** set in **Dubai**, featuring immersive, responsive Sign In and Sign Up screens built using **React**, **TypeScript**, and **Tailwind CSS**.
 
 https://escape-room-hazel.vercel.app/
 
